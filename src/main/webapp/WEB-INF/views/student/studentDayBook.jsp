@@ -14,7 +14,7 @@
     <title>Title</title>
 </head>
 <body>
-<t:tag>
+<t:tagStudent>
     <jsp:attribute name="header">
       <h1>Welcome</h1>
     </jsp:attribute>
@@ -66,7 +66,7 @@
         <a href="${pageContext.request.contextPath}/mainStudent/dayBook?date=${nextWeek.getTime()}">Następny tydzien</a>
 </div>
     </jsp:body>
-</t:tag>
+</t:tagStudent>
 
 </body>
 </html>

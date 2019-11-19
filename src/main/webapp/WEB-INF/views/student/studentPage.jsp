@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<t:tag>
+<t:tagStudent>
     <jsp:attribute name="header">
       <h1>Welcome</h1>
     </jsp:attribute>
@@ -23,7 +23,7 @@
     <jsp:body>
 
     </jsp:body>
-</t:tag>
+</t:tagStudent>
 
 
 

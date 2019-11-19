@@ -16,7 +16,7 @@
 <body>
 
 
-<t:tag>
+<t:tagStudent>
     <jsp:attribute name="header">
       <h1>Welcome</h1>
     </jsp:attribute>
@@ -51,7 +51,7 @@
         </table>
 </div>
     </jsp:body>
-</t:tag>
+</t:tagStudent>
 
 
 </body>
