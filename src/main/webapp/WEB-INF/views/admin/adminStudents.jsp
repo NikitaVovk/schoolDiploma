@@ -8,59 +8,66 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/mainAdmin/students">Uczni</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/teachers">Nauczyciele</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/classes">Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/subjects">Przedmioty</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/tsc">Zajęcia Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/plan">Plan Zajęć</a>
+<t:tagAdmin>
+    <jsp:attribute name="header">
+      <h1>Welcome</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
 
-<form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
-    <h2>Znajdź ucznia</h2>
-    <label>Nazwisko</label>
-    <input type="text" name="surname">
-    <label>Imie</label>
-    <input type="text" name="name">
-    <input type="Submit" value="Znajdź">
-</form>
+        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
+            <h2>Znajdź ucznia</h2>
+            <label>Nazwisko</label>
+            <input type="text" name="surname">
+            <label>Imie</label>
+            <input type="text" name="name">
+            <input type="Submit" value="Znajdź">
+        </form>
 
-<form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
-    <label>Klasa</label>
-<select id="idClass" name="idClass">
-    <option name="option" value="${null}" selected>Wszystkie</option>
-    <c:forEach var="cl" items="${classes}">
-        <option name="option" value="${cl.idclass}">${cl.name}</option>
-    </c:forEach>
-</select>
-    <input type="Submit" value="Znajdź">
-</form>
+        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
+            <label>Klasa</label>
+            <select id="idClass" name="idClass">
+                <option name="option" value="${null}" selected>Wszystkie</option>
+                <c:forEach var="cl" items="${classes}">
+                    <option name="option" value="${cl.idclass}">${cl.name}</option>
+                </c:forEach>
+            </select>
+            <input type="Submit" value="Znajdź">
+        </form>
 
-<a href="${pageContext.request.contextPath}/mainAdmin/studentEditor">Dodaj ucznia</a>
-<br>
+        <a href="${pageContext.request.contextPath}/mainAdmin/studentEditor">Dodaj ucznia</a>
+        <br>
 
-<table width="100%" border="2px solid blue">
+        <table width="100%" border="2px solid blue">
 
-    <tr>
-        <td>ID</td>
-        <td>Nazwisko Imie</td>
-        <td>Data urodzenia</td>
-        <td>Klasa</td>
-    </tr>
-    <c:forEach var="student" items="${studentList}">
-        <tr>
-            <td>${student.idstudent}</td>
-            <td><a href="${pageContext.request.contextPath}/mainAdmin/studentEditor?idStudent=${student.idstudent}">
-                    ${student.surname} ${student.name}</a></td>
-            <td>${student.dateOfBirth}</td>
-            <td>${student.aClass.name}</td>
-        </tr>
-    </c:forEach>
-</table>
+            <tr>
+                <td>ID</td>
+                <td>Nazwisko Imie</td>
+                <td>Data urodzenia</td>
+                <td>Klasa</td>
+            </tr>
+            <c:forEach var="student" items="${studentList}">
+                <tr>
+                    <td>${student.idstudent}</td>
+                    <td><a href="${pageContext.request.contextPath}/mainAdmin/studentEditor?idStudent=${student.idstudent}">
+                            ${student.surname} ${student.name}</a></td>
+                    <td>${student.dateOfBirth}</td>
+                    <td>${student.aClass.name}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+    </jsp:body>
+</t:tagAdmin>
+
 
 </body>
 </html>

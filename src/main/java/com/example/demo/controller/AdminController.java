@@ -244,7 +244,7 @@ public class AdminController {
         newTSC.setSubject(subjectService.findSubjectByIdSubject(idSubject));
         newTSC.setTeacher(teacherService.findTeacherByIdTeacher(idTeacher));
         tsc.addTSC(newTSC);
-        return "redirect:/mainAdmin/tsc";
+        return "redirect:/mainAdmin/tsc?idClass="+idClass;
     }
     @GetMapping(value = "/plan")
     public String showPlan(@RequestParam(value="idClass", required = false)Long idClass,

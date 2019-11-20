@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/mainStudent")
+@SessionAttributes(value = "studentJSP")
 public class StudentController {
 
     @Autowired
@@ -39,10 +42,13 @@ public class StudentController {
     private TestService testService;
 
     @GetMapping
-    public String studentMainPage(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
+    public ModelAndView studentMainPage(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
     map.put("student",studentService.findStudentByIdAccount(account.getId()));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("student/studentMainPage");
+        modelAndView.addObject("studentJSP",studentService.findStudentByIdAccount(account.getId()));
 
-        return "student/studentMainPage";
+        return modelAndView;
     }
 
     @GetMapping("/")

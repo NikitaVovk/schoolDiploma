@@ -8,35 +8,41 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/mainTeacher/showLesson">Zajęcia</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showMarks">Oceny</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showFrequency">Frekwencja</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showTest">Sprawdziany</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showPlan">Plan zajęć</a>
-
-<h2>Oceny klasy ${tsc.aClass.name} Przedmiot ${tsc.subject.name}</h2>
-<table  width="50%" border="2px solid blue">
-    <tr>
-        <td>Uczeń</td>
-        <td>Oceny</td>
-    </tr>
-    <c:set var="i" value="0"/>
-    <c:forEach var="student" items="${listStudents}">
-        <tr>
-        <td>${student.name} ${student.surname}</td>
-        <td>
-            <c:forEach var="mark" items="${markList.get(i)}">
-                ${mark.mark}
+<t:tagTeacher>
+    <jsp:attribute name="header">
+      <h1>Welcome</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
+        <h2>Oceny klasy ${tsc.aClass.name} Przedmiot ${tsc.subject.name}</h2>
+        <table  width="50%" border="2px solid blue">
+            <tr>
+                <td>Uczeń</td>
+                <td>Oceny</td>
+            </tr>
+            <c:set var="i" value="0"/>
+            <c:forEach var="student" items="${listStudents}">
+                <tr>
+                    <td>${student.name} ${student.surname}</td>
+                    <td>
+                        <c:forEach var="mark" items="${markList.get(i)}">
+                            ${mark.mark}
+                        </c:forEach>
+                    </td>
+                    <c:set var="i" value="${i+1}"/>
+                </tr>
             </c:forEach>
-        </td>
-        <c:set var="i" value="${i+1}"/>
-        </tr>
-    </c:forEach>
-</table>
+        </table>
+    </jsp:body>
+</t:tagTeacher>
+
 </body>
 </html>

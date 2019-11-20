@@ -7,7 +7,7 @@
     <form action="${pageContext.request.contextPath}/logout" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
-
+    <p>Hello,${studentJSP.name}!!!</p>
     <jsp:invoke fragment="header"/>
 </header>
 <main id="body">

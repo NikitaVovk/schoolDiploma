@@ -8,22 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<p>Hello,${nameTeacher}!!!</p>
-<a href="${pageContext.request.contextPath}/mainTeacher/showLesson">Zajęcia</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showMarks">Oceny</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showFrequency">Frekwencja</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showTest">Sprawdziany</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showPlan">Plan zajęć</a>
+<t:tagTeacher>
+    <jsp:attribute name="header">
+      <h1>Welcome</h1>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
 
+    </jsp:body>
+</t:tagTeacher>
 
-
-<form action="${pageContext.request.contextPath}/logout" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 </body>
 </html>
