@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 </head>
 <body>
 
@@ -23,7 +24,7 @@
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
-<div class="content">
+
         <table width="50%" border="2px solid blue">
             <tr>
                 <c:forEach var="day" items="${datesString}">
@@ -54,7 +55,7 @@
         </table>
         <a href="${pageContext.request.contextPath}/mainStudent/test?date=${prevWeek.getTime()}">Poprzedni tydzien</a>
         <a href="${pageContext.request.contextPath}/mainStudent/test?date=${nextWeek.getTime()}">Następny tydzien</a>
-</div>
+
     </jsp:body>
 </t:tagStudent>
 

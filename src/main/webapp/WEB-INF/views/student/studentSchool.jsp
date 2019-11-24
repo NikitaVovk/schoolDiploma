@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 </head>
 <body>
 <t:tagStudent>
@@ -22,7 +23,7 @@
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
-<div class="content">
+
         <h1>Szkoła</h1>
         <table>
             <tr>
@@ -59,7 +60,7 @@
                 </tr>
             </c:forEach>
         </table>
-</div>
+
     </jsp:body>
 </t:tagStudent>
 

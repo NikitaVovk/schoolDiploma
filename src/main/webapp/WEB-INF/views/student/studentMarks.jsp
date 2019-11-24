@@ -12,19 +12,28 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
 </head>
 <body>
 
 
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+                    <div class="gretting">
+                        <div><h1>Welcome</h1></div>
+                    </div>
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+                <div class="container" id="container-footer">
+                    <p id="copyright">
+                        Copyright 1927, Future Bits When There Be Bits Inc.
+                    </p>
+                </div>
     </jsp:attribute>
     <jsp:body>
-<div class="content">
+
+        <h2>Oceny</h2>
+        <br>
 
         <table width="100%" border="2px solid blue">
             <tr>
@@ -49,7 +58,7 @@
                 </tr>
             </c:forEach>
         </table>
-</div>
+
     </jsp:body>
 </t:tagStudent>
 
