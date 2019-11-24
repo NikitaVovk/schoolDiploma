@@ -26,10 +26,10 @@ footer {
     height: 50px;
 }
 #content-body {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.5);
     display: grid;
     justify-content: center;
-    min-height: 84.3vh;
+
 }
 .container {
     width: 1000px;
@@ -134,10 +134,191 @@ input {
 .content {
     width: 790px;
     /* background: white; */
+    min-height: 84.3vh;
     margin-left: 210px;
+    margin-bottom: 20px;
 }
 .content-wrapper {
     background: white;
     padding: 20px;
     min-height: 420px;
 }
+
+#tabName{
+    font-size: 36;
+    font-weight: bold;
+    padding-left: 100px;
+}
+
+#tabNameInfo{
+    margin-top: 20;
+    margin-bottom: 25px;
+    font-size: 16;
+    padding-left: 120px;
+}
+#tabWeek{
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 22px;
+    padding-left: 120px;
+    padding-right: 120px;
+    color: #316e5b;
+}
+
+.hr hr{
+    border-top: 1px solid black;
+    padding-left: 40;
+    padding-right: 40;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.hr2  hr {
+    border-top: 1px solid black;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 20px;
+}
+.links2 {
+    text-decoration: none;
+    color: white;
+    display: grid;
+    font-size: 13px;
+    line-height: 30px;
+    justify-content: center;
+}
+
+.prevNext{
+    display: grid;
+    grid-auto-flow: column;
+    margin-bottom: 25px;
+    align-content:center;
+    justify-content: center;
+}
+
+#prev{
+    margin-right: 150px;
+    display: block;
+    align-content:center;
+    justify-content: center;
+    height: 30px;
+    background: rgba(46, 133, 255, 0.8);
+    margin-top: 6px;
+    border-radius: 4px;
+    border: 1px rgb(11, 93, 207) solid;
+    padding: 3px;
+    width: 120px;
+}
+
+#next{
+    margin-left: 150px;
+    display: block;
+    align-content:center;
+    justify-content: center;
+    height: 30px;
+    background: rgba(46, 133, 255, 0.8);
+    margin-top: 6px;
+    border-radius: 4px;
+    border: 1px rgb(11, 93, 207) solid;
+    padding: 3px;
+    width: 120px;
+}
+
+
+
+
+
+table {
+    font-size: 18px;
+
+    border-collapse: collapse;
+    text-align: center;
+}
+th {
+    text-align: center;
+    background: rgba(46, 133, 255, 0.7);
+    color: white;
+
+}
+th, td {
+    border-radius: 2px;
+    padding: 10px 10px;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+tr:nth-child(odd) {
+    background: #f0f8ff;
+}
+tr:nth-child(even) {
+    background: #D8E6F3;
+}
+table.testClass tr:nth-child(odd){
+    background: #f0f8ff;;
+}
+table.testClass tr:nth-child(even){
+    background: #D8E6F3;;
+}
+table.testClass2 td:nth-child(even){
+    background: #f0f8ff;;
+}
+.mayNull {
+    min-height: 140px;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.mayNull1 {
+    min-height: 70px;
+ min-width: 125px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.mayNull p{
+    margin-bottom: 5px;
+}
+
+.midTable{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.leftTable{
+    margin-left: 90px;
+    display: grid;
+    justify-content: left;
+
+}
+
+
+.dayBook{
+    width: 90px;
+    height: 65px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+
+}
+.dayBook p{
+    margin-bottom: 5px;
+}
+
+.freq{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    border-radius: 50%;
+    width: 30px;
+    background: rgba(248, 54, 1, 0.5)
+}
+.mark{    display: grid;
+    justify-content: center;
+    align-content: center;
+    border-radius: 50%;
+    width: 30px;
+
+    background: rgba(55, 136, 246, 0.64)}

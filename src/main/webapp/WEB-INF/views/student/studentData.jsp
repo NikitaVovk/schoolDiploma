@@ -15,37 +15,53 @@
 <body>
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+                          <div class="gretting">
+                              <div><h1>Welcome</h1></div>
+                          </div>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
-        <h2>Dane ucznia</h2>
+        <div id = "tabName">
+            <p>Dane ucznia</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+        <div id="tabName">
+
+        </div>
+        <div id="tabNameInfo">
+
+        </div>
+
+        <div class="leftTable">
         <table>
             <tr>
-                <td>Imie nazwisko</td>
+                <th>Imie nazwisko</th>
                 <td>${student.name} ${student.surname}</td>
             </tr>
             <tr>
-                <td>Data urodzenia</td>
+                <th>Data urodzenia</th>
                 <td>${student.dateOfBirth}</td>
             </tr>
             <tr>
-                <td>Adres</td>
+                <th>Adres</th>
                 <td>${student.address}</td>
             </tr>
             <tr>
-                <td>Email</td>
+                <th>Email</th>
                 <td>${student.email}</td>
             </tr>
             <tr>
-                <td>Telefon</td>
+                <th>Telefon</th>
                 <td>${student.phone}</td>
             </tr>
         </table>
-
+        </div>
     </jsp:body>
 </t:tagStudent>
 

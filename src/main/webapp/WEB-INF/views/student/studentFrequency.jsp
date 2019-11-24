@@ -18,23 +18,37 @@
 <body>
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+                          <div class="gretting">
+                              <div><h1>Welcome</h1></div>
+                          </div>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
+        <div id = "tabName">
+            <p>Frekwencja</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+            <p>Twoja frekwencja uzyskana w tym semestrze:</p>
+        </div>
+<div class="midTable">
 
         <table width="100%" border="2px solid blue">
             <tr>
-                <td>Przedmiot</td>
-                <td>Nieobecność</td>
-                <td>Procent</td>
+                <th>Przedmiot</th>
+                <th>Nieobecność</th>
+                <th>Procent</th>
             </tr>
             <c:set var="i" value="0"/>
             <c:forEach var="subjectItem" items="${subjects}" >
                 <tr>
-                    <td>${subjectItem.name}</td>
+                    <td><div style="min-width: 300px">${subjectItem.name}</div></td>
 
                     <td>
 
@@ -57,7 +71,7 @@
                 </tr>
             </c:forEach>
         </table>
-
+</div>
     </jsp:body>
 </t:tagStudent>
 

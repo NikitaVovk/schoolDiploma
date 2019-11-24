@@ -18,17 +18,46 @@
 
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+                          <div class="gretting">
+                              <div><h1>Welcome</h1></div>
+                          </div>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
-        <table width="50%" border="2px solid blue">
+        <div id = "tabName">
+            <p>Sprawdziany</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+
+        </div>
+        <div id="tabWeek">
+            <p>Od  ${dates.get(0).get(0).toString()} do ${dates.get(dates.size()-1).get(dates.get(dates.size()-1).size()-1).toString()}</p>
+            <hr>
+        </div>
+
+
+        <div class="prevNext">
+            <div id="prev">
+                <a href="${pageContext.request.contextPath}/mainStudent/test?date=${prevWeek.getTime()}" class="links2">Poprzedni tydzien</a>
+            </div>
+            <div id="next">
+                <a href="${pageContext.request.contextPath}/mainStudent/test?date=${nextWeek.getTime()}" class="links2">Następny tydzien</a>
+            </div>
+        </div>
+
+        <div class="midTable">
+        <table width="100%" border="2px solid blue" class="testClass" style="font-size: 15px;">
             <tr>
                 <c:forEach var="day" items="${datesString}">
-                    <td>${day.name}</td>
+                    <th>${day.name}</th>
                 </c:forEach>
             </tr>
             <c:forEach var="dateArray" items="${dates}">
@@ -39,22 +68,24 @@
                 </tr>
                 <tr>
                     <c:forEach var="date" items="${dateArray}">
-                        <td>
+                        <td class="testClass">
+                            <div class="mayNull1">
                             <c:forEach var="test" items="${tests}">
 
                                 <c:if test="${test.date.toString().equals(date.toString())}">
                                     <p><strong>${test.tsc.subject.name}</strong></p>
-                                    <p>${test.test}</p>
+                                    <p><i>${test.test}</i></p>
                                 </c:if>
 
                             </c:forEach>
+                            </div>
                         </td>
                     </c:forEach>
                 </tr>
             </c:forEach>
         </table>
-        <a href="${pageContext.request.contextPath}/mainStudent/test?date=${prevWeek.getTime()}">Poprzedni tydzien</a>
-        <a href="${pageContext.request.contextPath}/mainStudent/test?date=${nextWeek.getTime()}">Następny tydzien</a>
+        </div>
+
 
     </jsp:body>
 </t:tagStudent>

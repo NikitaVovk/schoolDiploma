@@ -32,14 +32,23 @@
     </jsp:attribute>
     <jsp:body>
 
-        <h2>Oceny</h2>
-        <br>
+        <div id = "tabName">
+            <p>Oceny</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+            <p>Twoje oceny uzyskane w tym semestrze:</p>
+        </div>
 
         <table width="100%" border="2px solid blue">
             <tr>
-                <td>Przedmiot</td>
-                <td>Oceny</td>
-                <td>Ocena śródroczna </td>
+                <th style="min-width: 160px;">Przedmiot</th>
+                <th style="min-width: 300px;">Oceny</th>
+                <th>Ocena śródroczna </th>
             </tr>
             <c:forEach var="subjectItem" items="${subjects}" >
                 <tr>

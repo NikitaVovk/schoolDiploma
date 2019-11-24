@@ -125,12 +125,8 @@ public class StudentController {
         map.put("frequency",frequencyService.findFrequencyByIdStudentAndDates(studentService.findStudentByIdAccount(account.getId()).getIdstudent(),
                 tableService.findAllDatesInWeek(date)));
 
-        for (LessonTime lt:tableService.findAllLessonTime()) {
-            System.out.println(lt.getTimeStart());
-        }
-        for (TimeTable tt:tableService.findTimeTableByIdClass(studentService.findStudentByIdAccount(account.getId()).getaClass().getIdclass())) {
-            System.out.println("Days " +tt.getDaysOfWeek().getId()+" TSC "+tt.getTeacherSubjectClass().getSubject().getName()+" lessTime "+tt.getLessonTime().getId());
-        }
+
+        System.out.println( tableService.findAllLessonTime().get(0).getTimeStart().toLocalTime());
         return "student/studentDayBook";
     }
 
