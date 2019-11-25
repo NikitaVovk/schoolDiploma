@@ -17,6 +17,18 @@ header {
     background: rgba(46, 133, 255, 0.9);
     height: 100px;
 }
+.gretting{
+    justify-self: center;
+    margin-left: 200px;
+}
+.png > img{
+
+    padding-top: 10px;
+    padding-left: 25px;
+    height: 85px;
+    width: 145px;
+
+}
 footer {
     display: grid;
 

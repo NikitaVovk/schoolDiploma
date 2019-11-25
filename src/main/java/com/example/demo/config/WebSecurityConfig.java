@@ -50,7 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/mainTeacher/**").hasRole("TEACHER")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
                 .antMatchers("/mainStudent/**").hasRole("STUDENT")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
                 .antMatchers("/mainAdmin/**").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-
+                .antMatchers("/resources/css/**").permitAll()
+                .antMatchers("/resources/images/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()

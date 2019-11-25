@@ -17,9 +17,7 @@
 <body>
 <t:tagStudent>
     <jsp:attribute name="header">
-                          <div class="gretting">
-                              <div><h1>Welcome</h1></div>
-                          </div>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>

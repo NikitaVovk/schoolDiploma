@@ -6,6 +6,10 @@
 <header>
     <div id="pageHeader">
         <div class="container" id="container-header">
+            <div class="png"><img  src="../resources/images/school.png"/></div>
+            <div class="gretting">
+                <div class="png"><img src="../resources/images/schoolonline.png"></div>
+            </div>
     <jsp:invoke fragment="header"/>
 
 

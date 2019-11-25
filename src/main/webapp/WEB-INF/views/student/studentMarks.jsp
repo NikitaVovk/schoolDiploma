@@ -19,9 +19,7 @@
 
 <t:tagStudent>
     <jsp:attribute name="header">
-                    <div class="gretting">
-                        <div><h1>Welcome</h1></div>
-                    </div>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
                 <div class="container" id="container-footer">
