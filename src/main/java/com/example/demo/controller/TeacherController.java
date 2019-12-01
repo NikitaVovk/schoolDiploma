@@ -78,11 +78,16 @@ public class TeacherController {
                                     @RequestParam(value = "date",required = false) Long dateSeconds,
                                     @AuthenticationPrincipal AccountUserDetails account,
                                     Map<String,Object> map){
-        if (idTSC==null)
-            return "redirect:/mainTeacher/teacherSelectTSC?item=showLesson";
+        map.put("classList", teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()));
 
+        if (idTSC==null) {
+
+            return "teacher/lessonProperty";
+
+        }
 
         map.put("idTSC",idTSC);
+        map.put("className",teacherSubjectClassService.findTSCByIdTSC(idTSC));
 
         Date date=null;
         if (dateSeconds==null) {
@@ -117,8 +122,10 @@ public class TeacherController {
     public String showTest (@RequestParam(value = "idTSC",required = false) Long idTSC,
                                     @AuthenticationPrincipal AccountUserDetails account,
                                     Map<String,Object> map) {
+        map.put("classList", teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()));
+
         if (idTSC == null)
-            return "redirect:/mainTeacher/teacherSelectTSC?item=showTest";
+            return "teacher/teacherShowTest";
         map.put("idTSC",idTSC);
         map.put("tests",testService.findTestByIdTSC(idTSC));
         map.put("datesLessons",timeTableService.findAllDatesForLesson(idTSC));
@@ -129,8 +136,13 @@ public class TeacherController {
     public String showMarks (@RequestParam(value = "idTSC",required = false) Long idTSC,
                             @AuthenticationPrincipal AccountUserDetails account,
                             Map<String,Object> map) {
-        if (idTSC == null)
-            return "redirect:/mainTeacher/teacherSelectTSC?item=showMarks";
+        map.put("classList", teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()));
+
+        if (idTSC == null){
+            return "teacher/teacherShowMarks";
+
+        }
+
         map.put("idTSC",idTSC);
         map.put("tsc",teacherSubjectClassService.findTSCByIdTSC(idTSC));
         map.put("listStudents",studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()));
@@ -138,12 +150,18 @@ public class TeacherController {
                 teacherSubjectClassService.findTSCByIdTSC(idTSC).getSubject().getIdsubject()));
         return "teacher/teacherShowMarks";
     }
+
     @GetMapping(value = "/showFrequency")
     public String showFrequency (@RequestParam(value = "idTSC",required = false) Long idTSC,
                              @AuthenticationPrincipal AccountUserDetails account,
                              Map<String,Object> map) {
-        if (idTSC == null)
-            return "redirect:/mainTeacher/teacherSelectTSC?item=showFrequency";
+        map.put("classList", teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()));
+
+        if (idTSC == null) {
+            return "teacher/teacherShowFrequency";
+
+        }
+
         map.put("idTSC",idTSC);
         map.put("tsc",teacherSubjectClassService.findTSCByIdTSC(idTSC));
         map.put("listStudents",studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()));

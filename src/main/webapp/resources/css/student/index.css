@@ -2,7 +2,7 @@
     font-family: "Roboto", sans-serif;
 }
 body {
-    background-image: url(../images/2.png);
+    background-image: url(../../images/2.png);
     margin: 0;
 }
 header {
@@ -54,6 +54,28 @@ footer {
 #container-header {
     display: grid;
     grid-auto-flow: column;
+    height: 100px;
+}
+#container-header2 {
+    display: grid;
+    grid-auto-flow: column;
+    height: 40px;
+    background: rgba(46, 133, 255, 0.9);
+    border-radius: 0px 0px 100px 100px;
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    justify-content: left;
+    border-top: 1px white solid;
+
+}
+#witryna{
+    margin-left: 50px;
+    padding-left: 30px;
+    font-size: 30px;
+    color: #def2ff;
+
+
 }
 #container-footer {
     display: grid;
@@ -116,6 +138,7 @@ input {
 .navLinks {
     position: fixed;
     width: 200px;
+    padding-top: 40px;
     /* padding-right: 10px; */
 }
 .navlinks ul {
@@ -153,7 +176,9 @@ input {
 .content-wrapper {
     background: white;
     padding: 20px;
+    padding-top: 60px;
     min-height: 420px;
+    padding-bottom: 30px;
 }
 
 #tabName{

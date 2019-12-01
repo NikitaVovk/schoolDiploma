@@ -13,35 +13,71 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teacher/index.css" />
+
 </head>
 <body>
 <t:tagTeacher>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+
     </jsp:attribute>
     <jsp:body>
-        <table width="100%" border="2px solid blue">
-            <tr>
-                <c:forEach var="dateItem" items="${datesLessons}">
-                    <c:set var="colorDate" value="darkgreen"/>
-                    <c:if test="${dateItem.equals(dateChosen)}">
-                        <c:set var="colorDate" value="blue"/>
+
+        <div style="display: grid; grid-auto-flow: column;">
+            <div id = "tabName">
+                <p>Zajęcia</p>
+            </div>
+        <div class="selectClass">
+    <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
+            <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
+                <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson" selected>-</option>
+
+                <c:forEach var="aClass" items="${classList}">
+                    <c:set var="selected" value=""/>
+                    <c:if test="${aClass.id==idTSC}">
+                        <c:set var="selected" value="selected"/>
                     </c:if>
-
-                    <td> <a style="color: ${colorDate}" href="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${idTSC}&date=${dateItem.getTime()}">${dateItem.toString()}</a></td>
-
+                    <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
                 </c:forEach>
-            </tr>
+            </select>
+            </div>
+        </div>
 
-        </table>
+
+
+        <div class="hr">
+            <hr>
+        </div>
+<c:if test="${idTSC!=null}">
+        <div id="tabNameInfo" style="font-size: 20px;">
+            <p>Zajęcia: przedmiot - <b>"${className.subject.name}"</b>, klasa - <b>"${className.aClass.name}"</b>. Data <b>${dateChosen}</b></p>
+
+        </div>
+
+
+<%--        <table width="100%" border="2px solid blue">--%>
+<%--            <tr>--%>
+<%--                <c:forEach var="dateItem" items="${datesLessons}">--%>
+<%--                    <c:set var="colorDate" value="darkgreen"/>--%>
+<%--                    <c:if test="${dateItem.equals(dateChosen)}">--%>
+<%--                        <c:set var="colorDate" value="blue"/>--%>
+<%--                    </c:if>--%>
+
+<%--                    <td> <a style="color: ${colorDate}" href="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${idTSC}&date=${dateItem.getTime()}">${dateItem.toString()}</a></td>--%>
+
+<%--                </c:forEach>--%>
+<%--            </tr>--%>
+
+<%--        </table>--%>
 
 
         <form method="get" action="${pageContext.request.contextPath}/mainTeacher/showLesson" >
             <input type="hidden" name="idTSC" value="${idTSC}">
-            <select id="date" name="date" >
+            <div class="selectDate">
+            <select id="date" name="date"  class="selectorDate" style="margin-right: 25px;">
                 <c:forEach var="dateItem" items="${datesLessons}">
                     <c:set var="selected" value=""/>
                     <c:if test="${dateItem.equals(dateChosen)}">
@@ -51,35 +87,63 @@
                 </c:forEach>
             </select>
 
-            <input type="submit" value="Submit">
+            <input class="smallSubmit" type="submit" value="Zmień" style="margin-left: 25px;">
+            </div>
         </form>
+
+        <div class="smallHr">
+            <hr>
+        </div>
+
+        <div class="lessonProperties">
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/addLessonTheme?idTSC=${idTSC}&date=${dateChosen.getTime()}">
+            <div class="lessonTheme">
             <h2>Temat zajęcia</h2>
-            <input type="text" name="lessonTheme"value="${lessonTheme.theme}">
-            <input type="submit" value="Submit">
+            <input type="text" name="lessonTheme"value="${lessonTheme.theme}" class="ltAndHm">
+            <div class="centerSub">
+            <input type="submit" value="Zatwierdź" class="smallSubmit">
+            </div>
+            </div>
         </form>
+
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/addHomeWork?idTSC=${idTSC}&date=${dateChosen.getTime()}">
+            <div class="lessonHM">
             <h2>Zadanie domowe</h2>
-            <input type="text" name="homeWork"value="${homeWork.homeWork}">
-            <input type="submit" value="Submit">
+            <input type="text" name="homeWork"value="${homeWork.homeWork}" class="ltAndHm">
+            <div class="centerSub">
+                <input type="submit" value="Zatwierdź" class="smallSubmit">
+            </div>
+            </div>
         </form>
+            </div>
 
+        <div class="smallHr" style="margin-bottom: 40px">
+            <hr>
+        </div>
 
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/saveProperties?idTSC=${idTSC}&date=${dateChosen.getTime()}">
 
             <table width="100%" border="2px solid blue">
                 <tr>
-                    <td>Student</td>
-                    <td>Mark</td>
+                    <th>№</th>
+                    <th>Uczeń</th>
+                    <th>Ocena</th>
                 </tr>
+                <c:set var="iterator" value="0"/>
                 <c:forEach var="listItem" items="${listStudents}"  >
+                    <c:set var="iterator" value="${iterator+1}"/>
+
                     <c:set var="val" value=""/>
 
+
                     <tr>
-                        <td> <p>${listItem.idstudent}  ${listItem.surname} ${listItem.name} </p> </td>
+                    <td>
+                            ${iterator}
+                    </td>
+                        <td> <p>${listItem.surname} ${listItem.name} </p> </td>
 
                         <c:forEach var="freq" items="${freqDate}">
                             <c:choose>
@@ -103,17 +167,19 @@
                             </c:choose>
                         </c:forEach>
 
-                        <td><input type="text" value="${val}" name="studentProp" width="15px"></td>
+                        <td><input type="text" value="${val}" name="studentProp" class="markInput"></td>
 
                     </tr>
                 </c:forEach>
 
             </table>
-            <input type="submit" value="Submit Form">
+            <div class="centerSub" style="margin-top: 30px">
+            <input type="submit" value="Zatwierdź">
+            </div>
         </form>
-
-        <a href="${pageContext.request.contextPath}/mainTeacher/showAll?idTSC=${idTSC}">Show All Marks</a>
-        <a href="${pageContext.request.contextPath}/mainTeacher">Main page</a>
+</c:if>
+<%--        <a href="${pageContext.request.contextPath}/mainTeacher/showAll?idTSC=${idTSC}">Show All Marks</a>--%>
+<%--        <a href="${pageContext.request.contextPath}/mainTeacher">Main page</a>--%>
     </jsp:body>
 </t:tagTeacher>
 

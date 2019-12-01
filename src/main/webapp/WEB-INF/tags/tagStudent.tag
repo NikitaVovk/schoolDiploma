@@ -6,9 +6,9 @@
 <header>
     <div id="pageHeader">
         <div class="container" id="container-header">
-            <div class="png"><img  src="../resources/images/school.png"/></div>
+            <div class="png"><img  src="${pageContext.request.contextPath}/resources/images/school.png"/></div>
             <div class="gretting">
-                <div class="png"><img src="../resources/images/schoolonline.png"></div>
+                <div class="png"><img src="${pageContext.request.contextPath}/resources/images/schoolonline.png"></div>
             </div>
     <jsp:invoke fragment="header"/>
 
@@ -23,8 +23,11 @@
                     </form>
                 </div>
             </div>
-
-
+        </div>
+        <div class="container" id="container-header2">
+            <div id="witryna">
+                <p><b>Witryna Ucznia</b></p>
+            </div>
         </div>
     </div>
 </header>
@@ -67,7 +70,9 @@
 </main>
 <footer id="pagefooter">
     <div class="container" id="container-footer">
-    <jsp:invoke fragment="footer"/>
+        <p id="copyright">Copyright 2019, Politechnika Rzeszowska, Mykyta Vovk.</p>
+
+        <jsp:invoke fragment="footer"/>
     </div>
 </footer>
 </body>

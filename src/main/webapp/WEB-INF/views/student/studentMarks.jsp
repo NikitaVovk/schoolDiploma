@@ -12,7 +12,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
 </head>
 <body>
 
@@ -22,11 +22,7 @@
 
     </jsp:attribute>
     <jsp:attribute name="footer">
-                <div class="container" id="container-footer">
-                    <p id="copyright">
-                        Copyright 1927, Future Bits When There Be Bits Inc.
-                    </p>
-                </div>
+
     </jsp:attribute>
     <jsp:body>
 

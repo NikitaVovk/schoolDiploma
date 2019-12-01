@@ -127,6 +127,7 @@ input {
     width: 200px;
     height: 50px;
     box-shadow: 10px 10px 5px #aaaaaa;
+    margin-left: 18px;
 }
 
 #hr{
@@ -188,6 +189,7 @@ input {
     display: grid;
     align-content: center;
     justify-content: center;
+    margin-left: -60px;
 }
 .png > img{
 

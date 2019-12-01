@@ -12,31 +12,62 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teacher/index.css" />
+
 </head>
 <body>
 <t:tagTeacher>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
-        <table width="100%" border="2px solid blue">
+        <div id = "tabName">
+            <p>Plan zajęć</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+
+        </div>
+
+        <div id="tabWeek">
+            <p>Tydzień  ${dates.get(0).toString()} - ${dates.get(dates.size()-1).toString()}</p>
+
+            <hr>
+
+        </div>
+
+
+
+        <div class="prevNext">
+            <div id="prev">
+                <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${prevWeek.getTime()}" class="links2">Poprzedni tydzien</a>
+            </div>
+            <div id="next">
+                <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${nextWeek.getTime()}" class="links2">Następny tydzien</a>
+            </div>
+        </div>
+
+
+        <table width="100%" border="2px solid blue" style="font-size: 16px;">
             <tr>
-                <td>Lekcja</td>
-                <td>Pora lekcji</td>
+                <th>Lekcja</th>
+                <th>Pora lekcji</th>
                 <c:forEach var="day" items="${datesString}">
-                    <td>${day.name}
-                            ${dates[day.id-2].toString()}</td>
+                    <th>${day.name}
+                            ${dates[day.id-2].toString()}</th>
                 </c:forEach>
             </tr>
             <c:forEach var="lesson" items="${lessonTime}">
                 <tr>
                     <td>${lesson.id}</td>
-                    <td>${lesson.timeStart}
-                            ${lesson.timeEnd}</td>
+                    <td>${lesson.timeStart.toLocalTime()}
+                            ${lesson.timeEnd.toLocalTime()}</td>
 
                     <c:forEach var="date" items="${datesString}">
                         <td>

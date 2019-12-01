@@ -12,28 +12,61 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teacher/index.css" />
+
 </head>
 <body>
 <t:tagTeacher>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
-        <h2>Obecność klasy ${tsc.aClass.name} Przedmiot ${tsc.subject.name}</h2>
+        <div style="display: grid; grid-auto-flow: column;">
+            <div id = "tabName">
+                <p>Frekwencja</p>
+            </div>
+            <div class="selectClass">
+                <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
+                <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
+                    <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showFrequency" selected>-</option>
 
-        <table  width="50%" border="2px solid blue">
+                    <c:forEach var="aClass" items="${classList}">
+                        <c:set var="selected" value=""/>
+                        <c:if test="${aClass.id==idTSC}">
+                            <c:set var="selected" value="selected"/>
+                        </c:if>
+                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showFrequency?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+<c:if test="${idTSC!=null}">
+        <div id="tabNameInfo" style="font-size: 20px;">
+            <p>Przedmiot - <b>"${tsc.subject.name}"</b>, klasa - <b>"${tsc.aClass.name}"</b></p>
+
+        </div>
+
+        <div id="tabNameInfo">
+            <p>Frekwencja uczniów uzyskana w tym semestrze</p>
+        </div>
+        <div class="midTable">
+        <table  width="100%" border="2px solid blue">
             <tr>
-                <td>Uczeń</td>
-                <td>Liczba nieobecności</td>
-                <td>Procent obecności</td>
+                <th>№</th>
+                <th>Uczeń</th>
+                <th>Liczba nieobecności</th>
+                <th>Procent obecności</th>
             </tr>
             <c:set var="i" value="0"/>
             <c:forEach var="student" items="${listStudents}">
                 <tr>
+                    <td>${i+1}</td>
                     <td>${student.name} ${student.surname}</td>
                     <td>
                             ${freqList.get(i).size()}
@@ -43,7 +76,8 @@
                 </tr>
             </c:forEach>
         </table>
-
+        </div>
+    </c:if>
     </jsp:body>
 </t:tagTeacher>
 
