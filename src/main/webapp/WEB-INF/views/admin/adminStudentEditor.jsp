@@ -8,53 +8,82 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/index.css" />
+
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/mainAdmin/students">Uczni</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/teachers">Nauczyciele</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/classes">Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/subjects">Przedmioty</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/tsc">Zajęcia Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/plan">Plan Zajęć</a>
-<c:set var="url" value=""/>
-<c:set var="addOrEdit" value=""/>
-<c:choose>
-    <c:when test="${student==null}">
-        <c:set var="url" value="addStudent"/>
-        <c:set var="addOrEdit" value="Dodaj"/>
-    </c:when>
-    <c:otherwise>
-        <c:set var="url" value="editStudent?idStudent=${student.idstudent}"/>
-        <c:set var="addOrEdit" value="Edytuj"/>
-    </c:otherwise>
-</c:choose>
+<t:tagAdmin>
+    <jsp:attribute name="header">
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
 
-<form method="post" action="${pageContext.request.contextPath}/mainAdmin/${url}">
-    <h2>${addOrEdit} ucznia</h2>
-    <label>Nazwisko</label>
-    <input type="text" name="surname" value="${student.surname}">
-    <label>Imie</label>
-    <input type="text" name="name" value="${student.name}">
-    <label>Klasa</label>
+        <c:set var="url" value=""/>
+        <c:set var="addOrEdit" value=""/>
+        <c:choose>
+            <c:when test="${student==null}">
+                <c:set var="url" value="addStudent"/>
+                <c:set var="addOrEdit" value="Dodaj"/>
+            </c:when>
+            <c:otherwise>
+                <c:set var="url" value="editStudent?idStudent=${student.idstudent}"/>
+                <c:set var="addOrEdit" value="Edytuj"/>
+            </c:otherwise>
+        </c:choose>
+        <div id = "tabName">
+            <p>${addOrEdit} ucznia</p>
+        </div>
+        <div class="hr">
+            <hr>
+        </div>
+        <div id="tabNameInfo">
+            <p>Wypełnij informację</p>
+        </div>
 
-    <select id="aClass" name="aClass" >
-        <option name="option" value="${null}" selected>-</option>
-        <c:forEach var="cl" items="${classes}">
-            <c:set var="selected" value=""/>
-            <c:if test="${student.aClass.idclass==cl.idclass}">
-                <c:set var="selected" value="selected"/>
-            </c:if>
-            <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>
+        <div class="smallHr">
+            <hr>
+        </div>
 
-        </c:forEach>
-    </select>
-    <label>Data urodzenia</label>
-    <input type="date" name="dateOfBirth" min="2000-01-01" max="2015-12-31" value="${student.dateOfBirth}">
-    <input type="Submit" value="Zatwierdź">
-</form>
+        <form method="post" action="${pageContext.request.contextPath}/mainAdmin/${url}">
+            <div class="studentForm">
+            <label><strong>Nazwisko</strong></label>
+                <br>
+            <input type="text" name="surname" value="${student.surname}" class="ltAndHm">
+                <br>
+                <label><strong>Imie</strong></label>
+                <br>
+            <input type="text" name="name" value="${student.name}" class="ltAndHm">
+                <br>
+
+            <label><strong>Klasa</strong></label>
+
+            <select id="aClass" name="aClass" >
+                <option name="option" value="${null}" selected>-</option>
+                <c:forEach var="cl" items="${classes}">
+                    <c:set var="selected" value=""/>
+                    <c:if test="${student.aClass.idclass==cl.idclass}">
+                        <c:set var="selected" value="selected"/>
+                    </c:if>
+                    <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>
+
+                </c:forEach>
+            </select>
+                <br>
+            <label><strong>Data urodzenia</strong></label>
+            <input  class="ltAndHm" type="date" name="dateOfBirth" min="2000-01-01" max="2015-12-31" value="${student.dateOfBirth}">
+            <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
+            </div>
+        </form>
+
+    </jsp:body>
+</t:tagAdmin>
+
 
 </body>
 </html>

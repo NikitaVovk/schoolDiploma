@@ -12,25 +12,37 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
 </head>
 <body>
 
 
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+
     </jsp:attribute>
     <jsp:body>
-<div class="content">
+
+        <div id = "tabName">
+            <p>Oceny</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+            <p>Twoje oceny uzyskane w tym semestrze:</p>
+        </div>
 
         <table width="100%" border="2px solid blue">
             <tr>
-                <td>Przedmiot</td>
-                <td>Oceny</td>
-                <td>Ocena śródroczna </td>
+                <th style="min-width: 160px;">Przedmiot</th>
+                <th style="min-width: 300px;">Oceny</th>
+                <th>Ocena śródroczna </th>
             </tr>
             <c:forEach var="subjectItem" items="${subjects}" >
                 <tr>
@@ -49,7 +61,7 @@
                 </tr>
             </c:forEach>
         </table>
-</div>
+
     </jsp:body>
 </t:tagStudent>
 

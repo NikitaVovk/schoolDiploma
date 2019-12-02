@@ -12,50 +12,71 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
 </head>
 <body>
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
-<div class="content">
-        <h1>Szkoła</h1>
+        <div id = "tabName">
+            <p>Informacja o szkole</p>
+        </div>
+
+        <div class="hr">
+            <hr>
+        </div>
+
+        <div id="tabNameInfo">
+        <h2>Szkoła</h2>
+        </div>
+        <div class="hr2">
+            <hr>
+        </div>
+        <div class="leftTable">
         <table>
             <tr>
-                <td>Nazwa szkoły:</td>
+                <th>Nazwa szkoły:</th>
                 <td></td>
             </tr>
             <tr>
-                <td>Adres szkoły:</td>
+                <th>Adres szkoły:</th>
                 <td></td>
             </tr>
             <tr>
-                <td>Telofon:</td>
+                <th>Telofon:</th>
                 <td></td>
             </tr>
             <tr>
-                <td>Dyrektor:</td>
+                <th>Dyrektor:</th>
                 <td></td>
             </tr>
         </table>
-        <h1>Nauczyciele</h1>
+        </div>
+<div id="tabNameInfo">
+        <h2>Nauczyciele</h2>
+
+</div>
+        <div class="hr2">
+            <hr>
+        </div>
+<div class="midTable">
         <table width="50%" border="2px solid blue">
             <tr>
-                <td>Lp.</td>
-                <td>Przedmiot</td>
-                <td>Nauczyciel</td>
+                <th>Lp.</th>
+                <th>Przedmiot</th>
+                <th>Nauczyciel</th>
             </tr>
             <c:set var="i" value="0"/>
             <c:forEach var="ts" items="${tsc}">
                 <c:set var="i" value="${i=i+1}"/>
                 <tr>
                     <td>${i}</td>
-                    <td>${ts.subject.name}</td>
-                    <td>${ts.teacher.name}</td>
+                    <td><div style="min-width: 225px">${ts.subject.name}</div></td>
+                    <td><div style="min-width: 300px">${ts.teacher.name}</div></td>
                 </tr>
             </c:forEach>
         </table>

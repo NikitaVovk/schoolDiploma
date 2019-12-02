@@ -8,59 +8,128 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
-    <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/index.css" />
+
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/mainAdmin/students">Uczni</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/teachers">Nauczyciele</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/classes">Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/subjects">Przedmioty</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/tsc">Zajęcia Klasy</a>
-<a href="${pageContext.request.contextPath}/mainAdmin/plan">Plan Zajęć</a>
+<t:tagAdmin>
+    <jsp:attribute name="header">
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
+    </jsp:attribute>
+    <jsp:body>
+<div style="display: grid; grid-auto-flow: column;">
+        <div id = "tabName">
+            <p>Ucznie</p>
+        </div>
 
-<form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
-    <h2>Znajdź ucznia</h2>
-    <label>Nazwisko</label>
-    <input type="text" name="surname">
-    <label>Imie</label>
-    <input type="text" name="name">
-    <input type="Submit" value="Znajdź">
-</form>
+    <div class="addStudent">
 
-<form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
-    <label>Klasa</label>
-<select id="idClass" name="idClass">
-    <option name="option" value="${null}" selected>Wszystkie</option>
-    <c:forEach var="cl" items="${classes}">
-        <option name="option" value="${cl.idclass}">${cl.name}</option>
-    </c:forEach>
-</select>
-    <input type="Submit" value="Znajdź">
-</form>
+        <a href="${pageContext.request.contextPath}/mainAdmin/studentEditor">Dodaj ucznia</a>
+    </div>
 
-<a href="${pageContext.request.contextPath}/mainAdmin/studentEditor">Dodaj ucznia</a>
-<br>
+</div>
+        <div class="hr">
+            <hr>
+        </div>
 
-<table width="100%" border="2px solid blue">
+        <div id="tabNameInfo" style="font-size: 20px;">
+            <p>Wszystkie ucznie szkoły</p>
 
-    <tr>
-        <td>ID</td>
-        <td>Nazwisko Imie</td>
-        <td>Data urodzenia</td>
-        <td>Klasa</td>
-    </tr>
-    <c:forEach var="student" items="${studentList}">
-        <tr>
-            <td>${student.idstudent}</td>
-            <td><a href="${pageContext.request.contextPath}/mainAdmin/studentEditor?idStudent=${student.idstudent}">
-                    ${student.surname} ${student.name}</a></td>
-            <td>${student.dateOfBirth}</td>
-            <td>${student.aClass.name}</td>
-        </tr>
-    </c:forEach>
-</table>
+        </div>
+<div class="smallHr"><hr></div>
+
+        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
+            <div class="findStudent">
+                <div>
+            <h2 style="text-align: center;">Znajdź ucznia</h2>
+                </div>
+                <div id="searchStudent">
+                <div id="surName">
+            <label>Nazwisko</label>
+                    <br>
+            <input type="text" name="surname" class="ltAndHm">
+                </div>
+                <div id="name">
+            <label>Imie</label>
+                    <br>
+            <input type="text" name="name" class="ltAndHm">
+                </div>
+                    <br>
+
+            </div>
+                <input  class="smallSubmit" type="Submit" value="Znajdź" style="justify-self: center;">
+            </div>
+        </form>
+        <div class="smallHr"><hr></div>
+
+        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/students">
+            <div class="filtrClass">
+                <label style="text-align: center;"><strong>Filtruj według klasy:</strong></label>
+                <div class="selectorClass">
+
+            <select id="idClass" name="idClass" onchange="location = this.value;">
+                <option name="option" value="${pageContext.request.contextPath}/mainAdmin/students" selected>Wszystkie</option>
+                <c:forEach var="cl" items="${classes}">
+                    <c:set var="selected" value=""/>
+                    <c:if test="${cl.idclass==idClass}">
+                        <c:set var="selected" value="selected"/>
+                    </c:if>
+                    <option name="option" value="${pageContext.request.contextPath}/mainAdmin/students?idClass=${cl.idclass}" ${selected}>${cl.name}</option>
+                </c:forEach>
+            </select>
+
+                </div>
+            </div>
+        </form>
+
+
+<%--        <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >--%>
+<%--            <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson" selected>-</option>--%>
+
+<%--            <c:forEach var="aClass" items="${classList}">--%>
+<%--                <c:set var="selected" value=""/>--%>
+<%--                <c:if test="${aClass.id==idTSC}">--%>
+<%--                    <c:set var="selected" value="selected"/>--%>
+<%--                </c:if>--%>
+<%--                <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>--%>
+<%--            </c:forEach>--%>
+<%--        </select>--%>
+
+
+        <br>
+
+        <table width="100%" border="2px solid blue">
+
+            <tr>
+                <th>№</th>
+                <th>ID</th>
+                <th>Nazwisko Imie</th>
+                <th>Data urodzenia</th>
+                <th>Klasa</th>
+            </tr>
+            <c:set var="licznik" value="0" />
+            <c:forEach var="student" items="${studentList}">
+                <c:set var="licznik" value="${licznik+1}" />
+
+                <tr>
+                    <td>${licznik}</td>
+                    <td>${student.idstudent}</td>
+                    <td><a href="${pageContext.request.contextPath}/mainAdmin/studentEditor?idStudent=${student.idstudent}">
+                            ${student.surname} ${student.name}</a></td>
+                    <td>${student.dateOfBirth}</td>
+                    <td>${student.aClass.name}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
+    </jsp:body>
+</t:tagAdmin>
+
 
 </body>
 </html>

@@ -10,15 +10,15 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
 </head>
 <body>
 
 <t:tagStudent>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
+
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 

@@ -8,22 +8,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teacher/index.css" />
+
 </head>
 <body>
-<p>Hello,${nameTeacher}!!!</p>
-<a href="${pageContext.request.contextPath}/mainTeacher/showLesson">Zajęcia</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showMarks">Oceny</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showFrequency">Frekwencja</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showTest">Sprawdziany</a>
-<a href="${pageContext.request.contextPath}/mainTeacher/showPlan">Plan zajęć</a>
+<t:tagTeacher>
+    <jsp:attribute name="header">
+    </jsp:attribute>
+    <jsp:attribute name="footer">
+    </jsp:attribute>
+    <jsp:body>
 
+    </jsp:body>
+</t:tagTeacher>
 
-
-<form action="${pageContext.request.contextPath}/logout" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
 </body>
 </html>
