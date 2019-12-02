@@ -12,11 +12,12 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/index.css" />
+
 </head>
 <body>
 <t:tagAdmin>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
@@ -35,14 +36,32 @@
                 <c:set var="addOrEdit" value="Edytuj"/>
             </c:otherwise>
         </c:choose>
+        <div id = "tabName">
+            <p>${addOrEdit} ucznia</p>
+        </div>
+        <div class="hr">
+            <hr>
+        </div>
+        <div id="tabNameInfo">
+            <p>Wypełnij informację</p>
+        </div>
+
+        <div class="smallHr">
+            <hr>
+        </div>
 
         <form method="post" action="${pageContext.request.contextPath}/mainAdmin/${url}">
-            <h2>${addOrEdit} ucznia</h2>
-            <label>Nazwisko</label>
-            <input type="text" name="surname" value="${student.surname}">
-            <label>Imie</label>
-            <input type="text" name="name" value="${student.name}">
-            <label>Klasa</label>
+            <div class="studentForm">
+            <label><strong>Nazwisko</strong></label>
+                <br>
+            <input type="text" name="surname" value="${student.surname}" class="ltAndHm">
+                <br>
+                <label><strong>Imie</strong></label>
+                <br>
+            <input type="text" name="name" value="${student.name}" class="ltAndHm">
+                <br>
+
+            <label><strong>Klasa</strong></label>
 
             <select id="aClass" name="aClass" >
                 <option name="option" value="${null}" selected>-</option>
@@ -55,9 +74,11 @@
 
                 </c:forEach>
             </select>
-            <label>Data urodzenia</label>
-            <input type="date" name="dateOfBirth" min="2000-01-01" max="2015-12-31" value="${student.dateOfBirth}">
-            <input type="Submit" value="Zatwierdź">
+                <br>
+            <label><strong>Data urodzenia</strong></label>
+            <input  class="ltAndHm" type="date" name="dateOfBirth" min="2000-01-01" max="2015-12-31" value="${student.dateOfBirth}">
+            <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
+            </div>
         </form>
 
     </jsp:body>

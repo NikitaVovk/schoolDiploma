@@ -12,63 +12,115 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/index.css" />
+
 </head>
 <body>
 <t:tagAdmin>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
+        <div style="display: grid; grid-auto-flow: column;">
+            <div id = "tabName">
+                <p>Zajęcia</p>
+            </div>
+            <div class="selectClass">
+                <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
+                <select id="idClass" name="idClass"  class="selectorClass" onchange="location = this.value;" >
+                    <option name="option" value="${pageContext.request.contextPath}/mainAdmin/tsc" selected>-</option>
 
-        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/tsc">
-            <label>Klasa</label>
-            <select id="idClass" name="idClass">
-                <option name="option" value="${null}" selected>-</option>
-                <c:forEach var="cl" items="${classes}">
-                    <c:set var="selected" value=""/>
-                    <c:if test="${idClass==cl.idclass}">
-                        <c:set var="selected" value="selected"/>
-                    </c:if>
-                    <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>
-                </c:forEach>
-            </select>
-            <input type="Submit" value="Znajdź">
-        </form>
+                    <c:forEach var="oneClass" items="${classes}">
+                        <c:set var="selected" value=""/>
+                        <c:if test="${oneClass.idclass==idClass}">
+                            <c:set var="selected" value="selected"/>
+                        </c:if>
+                        <option name="option" value="${pageContext.request.contextPath}/mainAdmin/tsc?idClass=${oneClass.idclass}" ${selected}>${oneClass.name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="hr">
+            <hr>
+        </div>
+        <div id="tabNameInfo">
+            <p>Zajęcia klasy <strong>${aClass.name}</strong></p>
+        </div>
+
+        <div class="smallHr">
+            <hr>
+        </div>
+
+<%--        <form method="get" action="${pageContext.request.contextPath}/mainAdmin/tsc">--%>
+<%--            <label>Klasa</label>--%>
+<%--            <select id="idClass" name="idClass">--%>
+<%--                <option name="option" value="${null}" selected>-</option>--%>
+<%--                <c:set var="selected" value=""/>--%>
+<%--                <c:forEach var="cl" items="${classes}">--%>
+
+<%--                    <c:if test="${aClass.idclass==cl.idclass}">--%>
+<%--                        <c:set var="selected" value="selected"/>--%>
+<%--                    </c:if>--%>
+<%--                    <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>--%>
+<%--                </c:forEach>--%>
+<%--            </select>--%>
+<%--            <input type="Submit" value="Znajdź">--%>
+<%--        </form>--%>
 
 
         <c:if test="${idClass!=null}">
 
             <form method="post" action="${pageContext.request.contextPath}/mainAdmin/addTSC">
+                <div class="addTSC">
+                    <p style="margin-bottom: 15px"><STRONG>Dodaj Zajęcie</STRONG></p>
                 <input type="hidden" name="idClass" value="${idClass}">
+                    <div class="teacherSubject">
+                    <div class="subject">
                 <label>Przedmiot</label>
+                <br>
                 <select id="idSubject" name="idSubject">
                     <option name="option" value="${null}" selected>-</option>
                     <c:forEach var="sub" items="${subjects}">
                         <option name="option" value="${sub.idsubject}" >${sub.name}</option>
                     </c:forEach>
                 </select>
+                    </div>
+
+                    <div class="teacher">
                 <label>Nauczyciel</label>
+                    <br>
                 <select id="idTeacher" name="idTeacher">
                     <option name="option" value="${null}" selected>-</option>
                     <c:forEach var="teach" items="${teachers}">
                         <option name="option" value="${teach.idTeacher}" >${teach.surname} ${teach.name}</option>
                     </c:forEach>
                 </select>
-                <input type="submit" value="Dodaj">
+                    </div>
+                    </div>
+                <input type="submit" value="Dodaj" class="smallSubmit" style="justify-self: center;margin-top: 30px;">
+                </div>
             </form>
+            <div class="smallHr" style="margin-bottom: 40px;">
+                <hr>
+            </div>
 
-            <h2>Klasa ${idClass}</h2>
+
 
             <table width="100%" border="2px solid blue">
                 <tr>
-                    <td>Przedmiot</td>
-                    <td>Nauczyciel</td>
+                    <th>№</th>
+                    <th>Przedmiot</th>
+                    <th>Nauczyciel</th>
                 </tr>
+                <c:set var="licznik" value="0"/>
                 <c:forEach var="tscItem" items="${tsc}">
+                    <c:set var="licznik" value="${licznik+1}"/>
                     <tr>
+                        <td>${licznik}</td>
                         <td>${tscItem.subject.name}</td>
                         <td>${tscItem.teacher.surname} ${tscItem.teacher.name}</td>
                     </tr>

@@ -12,11 +12,12 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/index.css" />
+
 </head>
 <body>
 <t:tagAdmin>
     <jsp:attribute name="header">
-      <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
       <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
@@ -35,29 +36,51 @@
                 <c:set var="addOrEdit" value="Edytuj"/>
             </c:otherwise>
         </c:choose>
+        <div id = "tabName">
+            <p>${addOrEdit} nauczyciela</p>
+        </div>
+        <div class="hr">
+            <hr>
+        </div>
+        <div id="tabNameInfo">
+            <p>Wypełnij informację</p>
+        </div>
+
+        <div class="smallHr">
+            <hr>
+        </div>
+
 
         <form method="post" action="${pageContext.request.contextPath}/mainAdmin/${url}">
-            <h2>${addOrEdit} nauczyciela</h2>
-            <label>Nazwisko</label>
-            <input type="text" name="surname" value="${teacher.surname}">
-            <label>Imie</label>
-            <input type="text" name="name" value="${teacher.name}">
-            <label>Klasa</label>
+            <div class="studentForm">
+                <label><strong>Nazwisko</strong></label>
+                <br>
+                <input type="text" name="surname" value="${teacher.surname}" class="ltAndHm">
+                <br>
+                <label><strong>Imie</strong></label>
+                <br>
+                <input type="text" name="name" value="${teacher.name}" class="ltAndHm">
+                <br>
 
-            <select id="aClass" name="aClass" >
-                <option name="option" value="${null}" selected>-</option>
-                <c:forEach var="cl" items="${classes}">
-                    <c:set var="selected" value=""/>
-                    <c:if test="${teacher.aClass.idclass==cl.idclass}">
-                        <c:set var="selected" value="selected"/>
-                    </c:if>
-                    <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>
+                <label><strong>Klasa</strong></label>
 
-                </c:forEach>
-            </select>
-            <label>Data urodzenia</label>
-            <input type="date" name="dateOfBirth" min="1940-01-01" max="2015-12-31" value="${teacher.dateOfBirth}">
-            <input type="Submit" value="Zatwierdź">
+                <select id="aClass" name="aClass" >
+                    <option name="option" value="${null}" selected>-</option>
+                    <c:forEach var="cl" items="${classes}">
+                        <c:set var="selected" value=""/>
+                        <c:if test="${teacher.aClass.idclass==cl.idclass}">
+                            <c:set var="selected" value="selected"/>
+                        </c:if>
+                        <option name="option" value="${cl.idclass}" ${selected}>${cl.name}</option>
+
+                    </c:forEach>
+                </select>
+                <br>
+                <label><strong>Data urodzenia</strong></label>
+                <input  class="ltAndHm" type="date" name="dateOfBirth" min="1945-01-01" max="2015-12-31" value="${teacher.dateOfBirth}">
+                <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
+
+            </div>
         </form>
 
     </jsp:body>

@@ -391,7 +391,7 @@ select.selectorDate{
     margin-right: 30px;
     justify-content: center;
     align-content: center;
-width: 300px;
+    width: 300px;
 
 }
 
@@ -430,7 +430,7 @@ input.markInput{
     display: grid;
     justify-content: center;
     align-content: center;
- margin-bottom: 25px;
+    margin-bottom: 25px;
     width: 300px;
 }
 .addTest p{
@@ -450,7 +450,6 @@ form{
 
 .selectClass{
     display: grid;
-    border: 1px solid black;
     background: aliceblue;
     justify-self: end;
     margin-right: 100px;
@@ -458,5 +457,108 @@ form{
     border-radius: 5px;
     justify-content: center;
     align-content: center;
+    border: 1px solid black;
 
+}
+
+
+
+.findStudent{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-auto-flow: row;
+}
+
+#surName{
+    padding: 10px;
+    text-align: center;
+
+}
+#name{
+    padding: 10px;
+    text-align: center;
+}
+#searchStudent{
+    display: grid;
+    grid-auto-flow: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.filtrClass{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+.selectorClass{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.addStudent{
+    background: aliceblue;
+    justify-self: end;
+    margin-right: 100px;
+    padding: 5px;
+    display: block;
+    align-content:center;
+    justify-content: center;
+    height: 30px;
+    background: rgba(46, 133, 255, 0.8);
+    margin-top: 6px;
+    border-radius: 4px;
+    border: 1px rgb(11, 93, 207) solid;
+    padding: 3px;
+    width: 150px;
+
+}
+
+.addStudent a{
+    text-decoration: none;
+    color: white;
+    display: grid;
+    font-size: 15px;
+    line-height: 30px;
+    justify-content: center;
+}
+
+.studentForm{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.addClass{
+    display: grid;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.addTSC{
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.teacherSubject
+{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    grid-auto-flow: column;
+}
+
+.subject{
+    margin-right: 30px;
+}
+.teacher{
+    margin-left: 30px;
 }

@@ -20,6 +20,7 @@ import java.util.Properties;
 
 @Controller
 @RequestMapping("/mainAdmin")
+
 public class AdminController {
     @Autowired
     private StudentService studentService;
@@ -64,6 +65,7 @@ public class AdminController {
             students=studentService.findStudentBySurNameAndName(surname,name);
         if (idClass!=null)
             students=studentService.findStudentsByIdClass(idClass);
+        map.put("idClass",idClass);
         map.put("classes",classService.findAll());
         map.put("studentList",students);
         return "admin/adminStudents";
@@ -228,7 +230,8 @@ public class AdminController {
                            Map<String,Object> map){
         map.put("classes",classService.findAll());
         if (idClass!=null) {
-            map.put("idClass", idClass);
+            map.put("idClass",idClass);
+            map.put("aClass", classService.findClassByIdClass(idClass));
             map.put("teachers",teacherService.findAll());
             map.put("subjects",subjectService.findAll());
             map.put("tsc",tsc.findTSCByIdClass(idClass));
