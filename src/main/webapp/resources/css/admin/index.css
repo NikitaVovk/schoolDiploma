@@ -333,11 +333,12 @@ table.testClass2 td:nth-child(even){
 
 
 .dayBook{
-    width: 90px;
-    height: 65px;
+    width: auto;
+    height: 100px;
     display: grid;
     justify-content: center;
     align-content: center;
+    text-align: center;
 
 }
 .dayBook p{
@@ -561,4 +562,13 @@ form{
 }
 .teacher{
     margin-left: 30px;
+}
+
+.selectorTSC{
+    width: 90px;
+    text-align-last:center;
+    word-wrap: break-word;
+}
+select{
+    text-align-last:center;
 }

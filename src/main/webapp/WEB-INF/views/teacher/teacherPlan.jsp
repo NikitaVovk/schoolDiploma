@@ -56,8 +56,8 @@
 
         <table width="100%" border="2px solid blue" style="font-size: 16px;">
             <tr>
-                <th>Lekcja</th>
-                <th>Pora lekcji</th>
+                <th>№</th>
+                <th><p>Pora</p><p>lekcji</p></th>
                 <c:forEach var="day" items="${datesString}">
                     <th>${day.name}
                             ${dates[day.id-2].toString()}</th>

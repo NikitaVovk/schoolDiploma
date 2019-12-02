@@ -1,6 +1,8 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
 <%@attribute name="header" fragment="true" %>
 <%@attribute name="footer" fragment="true" %>
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
 <header>
@@ -34,6 +36,11 @@
 <main id="content-body">
     <div class="container" id="container-body">
     <div class="navLinks">
+        <c:set var="linkClassID" value=""/>
+        <c:if test="${classId!=null}">
+            <c:set var="linkClassID" value="?idClass=${classId}"/>
+
+        </c:if>
         <ul>
             <li>
                 <a href="${pageContext.request.contextPath}/mainAdmin/students" class="links">Ucznie</a>
@@ -48,11 +55,11 @@
                 <a href="${pageContext.request.contextPath}/mainAdmin/subjects" class="links">Przedmioty</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/mainAdmin/tsc" class="links">Zajęcia</a>
+                <a href="${pageContext.request.contextPath}/mainAdmin/tsc${linkClassID}" class="links">Zajęcia</a>
             </li>
 
             <li>
-                <a href="${pageContext.request.contextPath}/mainAdmin/plan" class="links">Plan zajęć</a>
+                <a href="${pageContext.request.contextPath}/mainAdmin/plan${linkClassID}" class="links">Plan zajęć</a>
             </li>
         </ul>
 

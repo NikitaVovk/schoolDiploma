@@ -230,7 +230,7 @@ public class AdminController {
                            Map<String,Object> map){
         map.put("classes",classService.findAll());
         if (idClass!=null) {
-            map.put("idClass",idClass);
+            map.put("classId",idClass);
             map.put("aClass", classService.findClassByIdClass(idClass));
             map.put("teachers",teacherService.findAll());
             map.put("subjects",subjectService.findAll());
@@ -256,7 +256,8 @@ public class AdminController {
 
         if (idClass!=null) {
 
-            map.put("idClass", idClass);
+            map.put("classId", idClass);
+            map.put("aClass", classService.findClassByIdClass(idClass));
             map.put("datesString", timeTableService.findAll());
             map.put("lessonTime", timeTableService.findAllLessonTime());
             map.put("timeTable", timeTableService.findTimeTableByIdClass(idClass));

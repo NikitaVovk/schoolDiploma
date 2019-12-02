@@ -34,7 +34,7 @@
 
                     <c:forEach var="oneClass" items="${classes}">
                         <c:set var="selected" value=""/>
-                        <c:if test="${oneClass.idclass==idClass}">
+                        <c:if test="${oneClass.idclass==classId}">
                             <c:set var="selected" value="selected"/>
                         </c:if>
                         <option name="option" value="${pageContext.request.contextPath}/mainAdmin/tsc?idClass=${oneClass.idclass}" ${selected}>${oneClass.name}</option>
@@ -47,7 +47,7 @@
         <div class="hr">
             <hr>
         </div>
-        <div id="tabNameInfo">
+        <div id="tabNameInfo" style="font-size: 20px;">
             <p>Zajęcia klasy <strong>${aClass.name}</strong></p>
         </div>
 
@@ -72,12 +72,12 @@
 <%--        </form>--%>
 
 
-        <c:if test="${idClass!=null}">
+        <c:if test="${classId!=null}">
 
             <form method="post" action="${pageContext.request.contextPath}/mainAdmin/addTSC">
                 <div class="addTSC">
                     <p style="margin-bottom: 15px"><STRONG>Dodaj Zajęcie</STRONG></p>
-                <input type="hidden" name="idClass" value="${idClass}">
+                <input type="hidden" name="idClass" value="${classId}">
                     <div class="teacherSubject">
                     <div class="subject">
                 <label>Przedmiot</label>

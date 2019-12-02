@@ -42,7 +42,7 @@
         <div class="hr">
             <hr>
         </div>
-        <div id="tabNameInfo">
+        <div id="tabNameInfo" style="font-size: 20px;">
             <p>Wypełnij informację</p>
         </div>
 
