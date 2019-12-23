@@ -34,19 +34,33 @@
     <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
             <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
                 <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson" selected>-</option>
-
+                <c:set var="tsc" value="0"/>
                 <c:forEach var="aClass" items="${classList}">
                     <c:set var="selected" value=""/>
-                    <c:if test="${aClass.id==idTSC}">
+                    <c:if test="${tsc==idTSC}">
                         <c:set var="selected" value="selected"/>
                     </c:if>
-                    <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                    <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${tsc}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                    <c:set var="tsc" value="${tsc+1}"/>
                 </c:forEach>
             </select>
             </div>
         </div>
 
+<%--        <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>--%>
+<%--        <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >--%>
+<%--            <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson" selected>-</option>--%>
 
+<%--            <c:forEach var="aClass" items="${classList}">--%>
+<%--                <c:set var="selected" value=""/>--%>
+<%--                <c:if test="${aClass.id==idTSC}">--%>
+<%--                    <c:set var="selected" value="selected"/>--%>
+<%--                </c:if>--%>
+<%--                <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>--%>
+<%--            </c:forEach>--%>
+<%--        </select>--%>
+<%--        </div>--%>
+<%--        </div>--%>
 
         <div class="hr">
             <hr>
@@ -119,10 +133,19 @@
         </form>
             </div>
 
-        <div class="smallHr" style="margin-bottom: 40px">
+        <div class="smallHr" style="margin-bottom: 20px">
             <hr>
         </div>
 
+
+    <div class="prevNext">
+        <div id="prev">
+            <a href="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${idTSC}&date=${prevLessonDate.getTime()}" class="links2">Poprzednie zajęcie</a>
+        </div>
+        <div id="next">
+            <a href="${pageContext.request.contextPath}/mainTeacher/showLesson?idTSC=${idTSC}&date=${nextLessonDate.getTime()}" class="links2">Następne zajęcie</a>
+        </div>
+    </div>
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/saveProperties?idTSC=${idTSC}&date=${dateChosen.getTime()}">
 

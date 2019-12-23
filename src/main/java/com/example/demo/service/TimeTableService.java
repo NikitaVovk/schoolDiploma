@@ -22,5 +22,6 @@ public interface TimeTableService {
     List<TimeTable> findTimeTableByIdTeacher(Long id);
     void saveTimeTable(ArrayList<TeacherSubjectClass> tscList,Long idClass);
     Date findNextDateForLessonByIdTSCAndDate(Long id,Date today);
+    Date findPrevDateForLessonByIdTSCAndDate(Long id,Date today);
 
 }

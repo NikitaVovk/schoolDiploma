@@ -6,6 +6,8 @@ import com.example.demo.domain.Class;
 import com.example.demo.security.AccountUserDetails;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 @Controller
 @RequestMapping("/mainAdmin")
@@ -42,6 +43,8 @@ public class AdminController {
     private HomeWorkService homeWorkService;
     @Autowired
     private TestService testService;
+//    @Autowired
+//    private StudentRepository studentRepository;
 
     @GetMapping
     public String adminMainPage(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
@@ -52,24 +55,44 @@ public class AdminController {
     @GetMapping("/students")
     public String adminStudents(@RequestParam(value = "surname",required = false) String surname,
                                 @RequestParam(value = "name",required = false) String name,
+                                @RequestParam(value = "page",required = false) Long page,
                                 @RequestParam(value = "idClass",required = false) Long idClass,
             @AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
-        List<Student> students=null;
+        String url ="";
+        if (page==null)
+            page=0L;
+
+        PagedListHolder<Student> studentPage=null;
+
         if ((surname==null&& name==null)||(surname.isEmpty() && name.isEmpty()))
-            students=studentService.findAll();
-        else if (surname.isEmpty() && !name.isEmpty())
-            students=studentService.findStudentByName(name);
-        else if (!surname.isEmpty() && name.isEmpty())
-            students=studentService.findStudentBySurName(surname);
-        else
-            students=studentService.findStudentBySurNameAndName(surname,name);
-        if (idClass!=null)
-            students=studentService.findStudentsByIdClass(idClass);
+            studentPage= studentService.findAllPages(10,page.intValue());
+           // students=studentService.findAll();
+        else if (surname.isEmpty() && !name.isEmpty()){
+            studentPage=studentService.findStudentByName(name,10,page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        else if (!surname.isEmpty() && name.isEmpty()){
+            studentPage=studentService.findStudentBySurName(surname,10,page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        else {
+            studentPage = studentService.findStudentBySurNameAndName(surname, name, 10, page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        if (idClass!=null) {
+            studentPage = studentService.findStudentsByIdClassPages(idClass, 5, page.intValue());
+            url="&idClass="+idClass;
+        }
+        map.put("url",url);
+        map.put("numPage",page);
+        map.put("pageCount",studentPage.getPageCount());
         map.put("idClass",idClass);
         map.put("classes",classService.findAll());
-        map.put("studentList",students);
+        map.put("studentList",studentPage.getPageList());
         return "admin/adminStudents";
     }
+
+
     @GetMapping("/studentEditor")
     public String studentEditor(@RequestParam(value = "idStudent",required = false) Long idStudent,
                                 @AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
@@ -132,17 +155,31 @@ public class AdminController {
     @GetMapping("/teachers")
     public String adminTeachers(@RequestParam(value = "surname",required = false) String surname,
                                 @RequestParam(value = "name",required = false) String name,
+                                @RequestParam(value = "page",required = false) Long page,
                                 @AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
-        List<Teacher> teachers=null;
+        String url ="";
+        if (page==null)
+            page=0L;
+
+        PagedListHolder<Teacher> teacherPage=null;
         if ((surname==null&& name==null)||(surname.isEmpty() && name.isEmpty()))
-            teachers=teacherService.findAll();
-        else if (surname.isEmpty() && !name.isEmpty())
-            teachers=teacherService.findTeacherByName(name);
-        else if (!surname.isEmpty() && name.isEmpty())
-            teachers=teacherService.findTeacherBySurName(surname);
-        else
-            teachers=teacherService.findTeacherBySurNameAndName(surname,name);
-        map.put("teacherList",teachers);
+            teacherPage=teacherService.findAll(10,page.intValue());
+        else if (surname.isEmpty() && !name.isEmpty()){
+            teacherPage=teacherService.findTeacherByName(name,10,page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        else if (!surname.isEmpty() && name.isEmpty()){
+            teacherPage=teacherService.findTeacherBySurName(surname,10,page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        else{
+            teacherPage=teacherService.findTeacherBySurNameAndName(surname,name,10,page.intValue());
+            url="&name="+name+"&surname="+surname;
+        }
+        map.put("url",url);
+        map.put("numPage",page);
+        map.put("pageCount",teacherPage.getPageCount());
+        map.put("teacherList",teacherPage.getPageList());
         return "admin/adminTeachers";
     }
 

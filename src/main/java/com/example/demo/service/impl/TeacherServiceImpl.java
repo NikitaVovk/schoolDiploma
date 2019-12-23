@@ -1,9 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.TeacherDao;
+import com.example.demo.domain.Student;
 import com.example.demo.domain.Teacher;
 import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,42 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> findAll() {
         return teacherDao.findAll();
+    }
+
+    @Override
+    public PagedListHolder<Teacher> findAll(int size, int page) {
+        PagedListHolder<Teacher> pagedListHolder= new PagedListHolder<>(teacherDao.findAll());
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+        // Page<Student> page = new PageImpl<>(studentDao.findAll(),pageRequest,studentDao.findAll().size());
+        return pagedListHolder;
+    }
+
+    @Override
+    public PagedListHolder<Teacher> findTeacherByName(String teacherName, int size, int page) {
+        PagedListHolder<Teacher> pagedListHolder= new PagedListHolder<>(teacherDao.findTeacherByName(teacherName));
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+        // Page<Student> page = new PageImpl<>(studentDao.findAll(),pageRequest,studentDao.findAll().size());
+        return pagedListHolder;
+    }
+
+    @Override
+    public PagedListHolder<Teacher> findTeacherBySurName(String teacherSurName, int size, int page) {
+        PagedListHolder<Teacher> pagedListHolder= new PagedListHolder<>(teacherDao.findTeacherBySurName(teacherSurName));
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+        // Page<Student> page = new PageImpl<>(studentDao.findAll(),pageRequest,studentDao.findAll().size());
+        return pagedListHolder;
+    }
+
+    @Override
+    public PagedListHolder<Teacher> findTeacherBySurNameAndName(String teacherSurName, String teacherName, int size, int page) {
+        PagedListHolder<Teacher> pagedListHolder= new PagedListHolder<>(teacherDao.findTeacherBySurNameAndName(teacherSurName,teacherName));
+        pagedListHolder.setPageSize(size);
+        pagedListHolder.setPage(page);
+        // Page<Student> page = new PageImpl<>(studentDao.findAll(),pageRequest,studentDao.findAll().size());
+        return pagedListHolder;
     }
 
     @Override

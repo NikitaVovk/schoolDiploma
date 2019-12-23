@@ -29,15 +29,17 @@
             </div>
             <div class="selectClass">
                 <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
+
                 <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
                     <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showMarks" selected>-</option>
-
+                    <c:set var="tscIter" value="0"/>
                     <c:forEach var="aClass" items="${classList}">
                         <c:set var="selected" value=""/>
-                        <c:if test="${aClass.id==idTSC}">
+                        <c:if test="${tscIter==idTSC}">
                             <c:set var="selected" value="selected"/>
                         </c:if>
-                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showMarks?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showMarks?idTSC=${tscIter}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                        <c:set var="tscIter" value="${tscIter+1}"/>
                     </c:forEach>
                 </select>
             </div>

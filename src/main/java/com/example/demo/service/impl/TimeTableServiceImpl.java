@@ -190,5 +190,20 @@ return dates;
         return null;
     }
 
+    @Override
+    public Date findPrevDateForLessonByIdTSCAndDate(Long id, Date today) {
+        ArrayList<Date> dates = new ArrayList<>();
+        dates= this.findAllDatesForLesson(id);
+        Date date=null;
+        for (Date d : dates){
+            if (d.before(today)){
+                date=d;
+            continue;
+            }
+            break;
+        }
+        return date;
+    }
+
 
 }

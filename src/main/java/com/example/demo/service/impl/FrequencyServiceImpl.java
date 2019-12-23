@@ -56,6 +56,7 @@ public class FrequencyServiceImpl implements FrequencyService {
         for (int i = 0; i<dates.size();i++){
             Float f;
             f=(float)(freqs.get(i).size()*100)/dates.get(i).size();
+            f=100-f;
             percent.add(f);
         }
         return percent;
@@ -72,6 +73,7 @@ public class FrequencyServiceImpl implements FrequencyService {
         for (int i = 0; i<freqs.size();i++){
             Float f;
             f=(float)(freqs.get(i).size()*100)/dates.size();
+            f=100-f;
             percent.add(f);
         }
         return percent;

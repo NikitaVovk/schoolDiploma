@@ -71,6 +71,33 @@
             </div>
         </form>
 
+        <br>
+
+        <c:if test="${numPage>0}">
+            <c:set value="${numPage-1}" var="prev"/>
+        </c:if>
+        <c:if test="${numPage<pageCount-1}">
+            <c:set value="${numPage+1}" var="next"/>
+        </c:if>
+        <c:if test="${numPage==pageCount-1}">
+            <c:set value="${numPage}" var="next"/>
+        </c:if>
+
+
+
+        <div class="prevNext">
+            <div id="prev">
+                <a href="${pageContext.request.contextPath}/mainAdmin/teachers?page=${prev}${url}" class="links2">Poprzednia strona</a>
+            </div>
+            <div id="pageCount" style="display: grid;justify-content: center;align-content: center;">
+                <p style="text-decoration: underline;">Strona <strong>${numPage+1}</strong> z <strong>${pageCount}</strong></p>
+            </div>
+            <div id="next">
+                <a href="${pageContext.request.contextPath}/mainAdmin/teachers?page=${next}${url}" class="links2">Następna strona</a>
+            </div>
+        </div>
+
+
         <table width="100%" border="2px solid blue">
 
             <tr>

@@ -79,14 +79,18 @@ public class TeacherController {
                                     @AuthenticationPrincipal AccountUserDetails account,
                                     Map<String,Object> map){
         map.put("classList", teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()));
-
+        //idTSC=teacherSubjectClassService.findTSCByIdTeacher()
         if (idTSC==null) {
 
             return "teacher/lessonProperty";
 
         }
 
+
         map.put("idTSC",idTSC);
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+      //  map.put("idTSCSecured",idTSC);
+
         map.put("className",teacherSubjectClassService.findTSCByIdTSC(idTSC));
 
         Date date=null;
@@ -103,6 +107,8 @@ public class TeacherController {
                     date =new Date(d.getYear(),d.getMonth(),d.getDate());
             }
         }
+        map.put("nextLessonDate",timeTableService.findNextDateForLessonByIdTSCAndDate(idTSC,date));
+        map.put("prevLessonDate",timeTableService.findPrevDateForLessonByIdTSCAndDate(idTSC,date));
         map.put("listStudents",studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()));
         map.put("markList2",marksService.findMarksByIdStudentAndIdSubject(studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()),
                 teacherSubjectClassService.findTSCByIdTSC(idTSC).getSubject().getIdsubject()));
@@ -127,6 +133,8 @@ public class TeacherController {
         if (idTSC == null)
             return "teacher/teacherShowTest";
         map.put("idTSC",idTSC);
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+        map.put("className",teacherSubjectClassService.findTSCByIdTSC(idTSC));
         map.put("tests",testService.findTestByIdTSC(idTSC));
         map.put("datesLessons",timeTableService.findAllDatesForLesson(idTSC));
         return "teacher/teacherShowTest";
@@ -142,8 +150,12 @@ public class TeacherController {
             return "teacher/teacherShowMarks";
 
         }
-
         map.put("idTSC",idTSC);
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+        //map.put("idTSCSecured",idTSC);
+//        map.put("idTSC",idTSC);
+//        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+
         map.put("tsc",teacherSubjectClassService.findTSCByIdTSC(idTSC));
         map.put("listStudents",studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()));
         map.put("markList",marksService.findMarksByIdStudentAndIdSubject(studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()),
@@ -163,6 +175,8 @@ public class TeacherController {
         }
 
         map.put("idTSC",idTSC);
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+
         map.put("tsc",teacherSubjectClassService.findTSCByIdTSC(idTSC));
         map.put("listStudents",studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()));
         map.put("freqList",frequencyService.findFrequencyByIdStudentAndIdSubject(studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()),
@@ -195,6 +209,7 @@ public class TeacherController {
         @PostMapping("/saveProperties")
     public String addMarks(@RequestParam("idTSC") Long idTSC,
                            @RequestParam(value = "date",required = true) Long dateSeconds,
+                           @AuthenticationPrincipal AccountUserDetails account,
                            @RequestParam("studentProp") List<String> studentProp){
 ArrayList<String> studentMarks=new ArrayList<>();
 ArrayList<String> studentFreq=new ArrayList<>();
@@ -207,6 +222,8 @@ ArrayList<String> studentFreq=new ArrayList<>();
                 studentMarks.add(s);
             else studentMarks.add("");
         }
+            long idTSCBuf = idTSC.longValue();
+            idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
 
 Date date=new Date(dateSeconds);
 frequencyService.addFrequency(studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()),
@@ -215,7 +232,7 @@ frequencyService.addFrequency(studentService.findStudentsByIdClass(teacherSubjec
         marksService.addMarks(studentService.findStudentsByIdClass(teacherSubjectClassService.findTSCByIdTSC(idTSC).getaClass().getIdclass()),
                 teacherSubjectClassService.findTSCByIdTSC(idTSC).getSubject(),
                 date,studentMarks);
-        return "redirect:/mainTeacher/showLesson?idTSC="+idTSC+"&date="+dateSeconds;
+        return "redirect:/mainTeacher/showLesson?idTSC="+idTSCBuf+"&date="+dateSeconds;
     }
 
     @GetMapping(value = "/showAll")
@@ -235,44 +252,57 @@ frequencyService.addFrequency(studentService.findStudentsByIdClass(teacherSubjec
     @PostMapping("/addHomeWork")
     public String addHomeWork(@RequestParam("idTSC") Long idTSC,
                            @RequestParam(value = "date",required = true) Long dateSeconds,
+                              @AuthenticationPrincipal AccountUserDetails account,
                            @RequestParam("homeWork") String hw){
+        long idTSCBuf = idTSC.longValue();
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
         HomeWork homeWork = new HomeWork();
         homeWork.setDateAdded(new Date(dateSeconds+86400000L));
         homeWork.setDateDue(new Date(timeTableService.findNextDateForLessonByIdTSCAndDate(idTSC,new Date(dateSeconds)).getTime()+86400000L));
         homeWork.setHomeWork(hw);
         homeWork.setTsc(teacherSubjectClassService.findTSCByIdTSC(idTSC));
         homeWorkService.addHomework(homeWork);
-        return "redirect:/mainTeacher/showLesson?idTSC="+idTSC+"&date="+dateSeconds;
+        return "redirect:/mainTeacher/showLesson?idTSC="+idTSCBuf+"&date="+dateSeconds;
     }
 
     @PostMapping("/addLessonTheme")
     public String addLessonTheme(@RequestParam("idTSC") Long idTSC,
                            @RequestParam(value = "date",required = true) Long dateSeconds,
+                                 @AuthenticationPrincipal AccountUserDetails account,
                            @RequestParam("lessonTheme") String lt){
+        long idTSCBuf = idTSC.longValue();
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
         LessonTheme lessonTheme = new LessonTheme();
         lessonTheme.setTheme(lt);
         lessonTheme.setDate(new Date(dateSeconds+86400000L));
         lessonTheme.setTsc(teacherSubjectClassService.findTSCByIdTSC(idTSC));
         lessonThemeService.addLessonTheme(lessonTheme);
-        return "redirect:/mainTeacher/showLesson?idTSC="+idTSC+"&date="+dateSeconds;
+        return "redirect:/mainTeacher/showLesson?idTSC="+idTSCBuf+"&date="+dateSeconds;
     }
     @PostMapping("/addTest")
     public String addTest(@RequestParam("idTSC") Long idTSC,
                                  @RequestParam(value = "date",required = true) Long dateSeconds,
+                          @AuthenticationPrincipal AccountUserDetails account,
                                  @RequestParam("test") String test){
+        long idTSCBuf = idTSC.longValue();
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
         Test testOb= new Test();
         testOb.setTest(test);
         testOb.setDate(new Date(dateSeconds+86400000L));
         testOb.setTsc(teacherSubjectClassService.findTSCByIdTSC(idTSC));
         testService.addTest(testOb);
-        return "redirect:/mainTeacher/showTest?idTSC="+idTSC;
+        return "redirect:/mainTeacher/showTest?idTSC="+idTSCBuf;
     }
     @PostMapping("/deleteTest")
     public String deleteTest(@RequestParam("idTSC") Long idTSC,
+                             @AuthenticationPrincipal AccountUserDetails account,
                           @RequestParam(value = "idTest",required = true) Integer idTest){
 
+        long idTSCBuf = idTSC.longValue();
+        idTSC=teacherSubjectClassService.findTSCByIdTeacher(teacherService.findTeacherByIdAccount(account.getId()).getIdTeacher()).get(idTSC.intValue()).getId();
+
         testService.deleteTest(testService.findTestByIdTSC(idTSC).get(idTest));
-        return "redirect:/mainTeacher/showTest?idTSC="+idTSC;
+        return "redirect:/mainTeacher/showTest?idTSC="+idTSCBuf;
     }
 
 
