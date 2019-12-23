@@ -37,5 +37,10 @@ public class AccountDaoImpl extends AbstractDao<Long, Account> implements Accoun
         persist(account);
     }
 
+    @Override
+    public void deleteAccount(Account account) {
+        delete(account);
+    }
+
 
 }

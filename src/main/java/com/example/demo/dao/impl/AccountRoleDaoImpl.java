@@ -16,6 +16,11 @@ public class AccountRoleDaoImpl extends AbstractDao<Long, AccountRole> implement
     }
 
     @Override
+    public AccountRole findAcRoleById(Long id) {
+        return getByKey(id);
+    }
+
+    @Override
     public AccountRole getRoleByName(String role) {
         Query query = createQuery("from AccountRole where ROLE =:role");
         query.setParameter("role", role);

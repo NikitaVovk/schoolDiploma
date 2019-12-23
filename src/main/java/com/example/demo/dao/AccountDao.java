@@ -9,5 +9,5 @@ public interface AccountDao {
     Account findAccountByIdaccount(Long id);
     void editAccount(Account account);
     void addAccount(Account account);
-
+    void deleteAccount(Account account);
 }

@@ -43,6 +43,10 @@ public class AdminController {
     private HomeWorkService homeWorkService;
     @Autowired
     private TestService testService;
+    @Autowired
+    private AccountService accountService;
+    @Autowired
+    private AccountRoleService accountRoleService;
 //    @Autowired
 //    private StudentRepository studentRepository;
 
@@ -116,6 +120,7 @@ public class AdminController {
                              @RequestParam(value="phone")String phone){
         Student newStudent= new Student();
         java.util.Date date=null;
+        Account newAccount = new Account();
 
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
@@ -132,6 +137,13 @@ public class AdminController {
             newStudent.setEmail(email);
             newStudent.setPhone(phone);
         studentService.addStudent(newStudent);
+
+        newAccount.setUsername(newStudent.getIdstudent().toString()+"u");
+        newAccount.setPassword(newStudent.getIdstudent().toString());
+        newAccount.setAccountRole(accountRoleService.findAcRoleById(1L));
+        accountService.addAccount(newAccount);
+        newStudent.setAccount(newAccount);
+        studentService.editStudent(newStudent);
         return "redirect:/mainAdmin/students";
     }
     @RequestMapping(value = "/editStudent", method = RequestMethod.POST)
@@ -169,6 +181,7 @@ public class AdminController {
     @RequestMapping(value = "/deleteStudent", method = RequestMethod.POST)
     public String deleteStudent(@RequestParam(value = "idStudent") Long id){
         studentService.deleteStudent(studentService.findStudentByIdStudent(id));
+        accountService.deleteAccount(accountService.findAccountByUsername(id+"u"));
         return "redirect:/mainAdmin/students";
     }
 
@@ -225,6 +238,7 @@ public class AdminController {
                              @RequestParam(value="phone")String phone){
         Teacher newTeacher= new Teacher();
         java.util.Date date=null;
+        Account newAccount = new Account();
 
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(dateS);
@@ -241,6 +255,13 @@ public class AdminController {
             newTeacher.setEmail(email);
             newTeacher.setPhone(phone);
         teacherService.addTeacher(newTeacher);
+        newAccount.setUsername(newTeacher.getIdTeacher().toString()+"n");
+        newAccount.setPassword(newTeacher.getIdTeacher().toString());
+        newAccount.setAccountRole(accountRoleService.findAcRoleById(2L));
+        accountService.addAccount(newAccount);
+        newTeacher.setAccount(newAccount);
+       teacherService.updateTeacher(newTeacher);
+
         return "redirect:/mainAdmin/teachers";
     }
     @RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
@@ -279,6 +300,7 @@ public class AdminController {
         timeTableService.deleteByTSC(tsc.findTSCByIdTeacher(id));
         tsc.deleteByTeacher(id);
         teacherService.deleteTeacher(teacherService.findTeacherByIdTeacher(id));
+        accountService.deleteAccount(accountService.findAccountByUsername(id+"n"));
         return "redirect:/mainAdmin/teachers";
     }
 
