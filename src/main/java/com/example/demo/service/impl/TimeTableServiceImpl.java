@@ -205,5 +205,28 @@ return dates;
         return date;
     }
 
+    @Override
+    public void deleteByTSC(List<TeacherSubjectClass> tsc) {
+        for (TeacherSubjectClass itemTSC: tsc) {
+            List<TimeTable> ttList = timeTableDao.findTimeTableByIdTSC(itemTSC.getId());
+            for (TimeTable ttItem : ttList) {
+            this.deleteTimeTable(ttItem);
+            }
+        }
+    }
+
+    @Override
+    public void deleteByTSC(TeacherSubjectClass tsc) {
+        List<TimeTable> ttList = timeTableDao.findTimeTableByIdTSC(tsc.getId());
+        for (TimeTable ttItem : ttList) {
+            this.deleteTimeTable(ttItem);
+        }
+    }
+
+    @Override
+    public void deleteTimeTable(TimeTable timeTable) {
+        timeTableDao.deleteTimeTable(timeTable);
+    }
+
 
 }

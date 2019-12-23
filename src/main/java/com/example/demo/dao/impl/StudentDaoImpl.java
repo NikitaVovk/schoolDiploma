@@ -87,4 +87,9 @@ public class StudentDaoImpl extends AbstractDao<Long, Student> implements Studen
     public void updateStudent(Student student) {
     update(student);
     }
+
+    @Override
+    public void deleteStudent(Student student) {
+delete(student);
+    }
 }

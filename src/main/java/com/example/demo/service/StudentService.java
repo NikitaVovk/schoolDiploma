@@ -21,4 +21,6 @@ public interface StudentService {
     PagedListHolder<Student> findStudentBySurNameAndName(String studentSurName,String studentName,int size, int page);
     void addStudent(Student student);
     void editStudent(Student student);
+    void deleteStudent(Student student);
+    void deleteClassInStudents(Long id);
 }

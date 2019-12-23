@@ -110,7 +110,10 @@ public class AdminController {
     public String addStudent(@RequestParam(value = "surname") String surname,
                              @RequestParam(value = "name") String name,
                                 @RequestParam(value="aClass")Long idClass,
-                             @RequestParam(value="dateOfBirth")String dateS){
+                             @RequestParam(value="dateOfBirth")String dateS,
+                             @RequestParam(value="address")String address,
+                             @RequestParam(value="email")String email,
+                             @RequestParam(value="phone")String phone){
         Student newStudent= new Student();
         java.util.Date date=null;
 
@@ -120,10 +123,14 @@ public class AdminController {
             e.printStackTrace();
         }
         Date dateSql = new Date(date.getTime()+86400000L);
+        if (idClass!=null)
         newStudent.setaClass(classService.findClassByIdClass(idClass));
         newStudent.setDateOfBirth(dateSql);
         newStudent.setName(name);
         newStudent.setSurname(surname);
+            newStudent.setAddress(address);
+            newStudent.setEmail(email);
+            newStudent.setPhone(phone);
         studentService.addStudent(newStudent);
         return "redirect:/mainAdmin/students";
     }
@@ -132,7 +139,10 @@ public class AdminController {
                              @RequestParam(value = "surname") String surname,
                              @RequestParam(value = "name") String name,
                              @RequestParam(value="aClass")Long idClass,
-                             @RequestParam(value="dateOfBirth")String dateS){
+                             @RequestParam(value="dateOfBirth")String dateS,
+                              @RequestParam(value="address")String address,
+                              @RequestParam(value="email")String email,
+                              @RequestParam(value="phone")String phone){
         Student student= studentService.findStudentByIdStudent(id);
         java.util.Date date=null;
 
@@ -142,11 +152,23 @@ public class AdminController {
             e.printStackTrace();
         }
         Date dateSql = new Date(date.getTime()+86400000L);
+        if (idClass!=null)
         student.setaClass(classService.findClassByIdClass(idClass));
+        else
+            student.setaClass(null);
         student.setDateOfBirth(dateSql);
         student.setName(name);
         student.setSurname(surname);
+            student.setAddress(address);
+            student.setEmail(email);
+            student.setPhone(phone);
         studentService.editStudent(student);
+        return "redirect:/mainAdmin/students";
+    }
+
+    @RequestMapping(value = "/deleteStudent", method = RequestMethod.POST)
+    public String deleteStudent(@RequestParam(value = "idStudent") Long id){
+        studentService.deleteStudent(studentService.findStudentByIdStudent(id));
         return "redirect:/mainAdmin/students";
     }
 
@@ -197,7 +219,10 @@ public class AdminController {
     public String addTeacher(@RequestParam(value = "surname") String surname,
                              @RequestParam(value = "name") String name,
                              @RequestParam(value="aClass")Long idClass,
-                             @RequestParam(value="dateOfBirth")String dateS){
+                             @RequestParam(value="dateOfBirth")String dateS,
+                             @RequestParam(value="address")String address,
+                             @RequestParam(value="email")String email,
+                             @RequestParam(value="phone")String phone){
         Teacher newTeacher= new Teacher();
         java.util.Date date=null;
 
@@ -207,10 +232,14 @@ public class AdminController {
             e.printStackTrace();
         }
         Date dateSql = new Date(date.getTime()+86400000L);
+        if (idClass!=null)
         newTeacher.setaClass(classService.findClassByIdClass(idClass));
         newTeacher.setDateOfBirth(dateSql);
         newTeacher.setName(name);
         newTeacher.setSurname(surname);
+            newTeacher.setAddress(address);
+            newTeacher.setEmail(email);
+            newTeacher.setPhone(phone);
         teacherService.addTeacher(newTeacher);
         return "redirect:/mainAdmin/teachers";
     }
@@ -219,7 +248,10 @@ public class AdminController {
                               @RequestParam(value = "surname") String surname,
                               @RequestParam(value = "name") String name,
                               @RequestParam(value="aClass")Long idClass,
-                              @RequestParam(value="dateOfBirth")String dateS){
+                              @RequestParam(value="dateOfBirth")String dateS,
+                              @RequestParam(value="address")String address,
+                              @RequestParam(value="email")String email,
+                              @RequestParam(value="phone")String phone){
         Teacher teacher= teacherService.findTeacherByIdTeacher(id);
         java.util.Date date=null;
 
@@ -229,13 +261,28 @@ public class AdminController {
             e.printStackTrace();
         }
         Date dateSql = new Date(date.getTime()+86400000L);
+        if (idClass!=null)
         teacher.setaClass(classService.findClassByIdClass(idClass));
+        else
+            teacher.setaClass(null);
         teacher.setDateOfBirth(dateSql);
         teacher.setName(name);
         teacher.setSurname(surname);
+            teacher.setAddress(address);
+            teacher.setEmail(email);
+            teacher.setPhone(phone);
         teacherService.updateTeacher(teacher);
         return "redirect:/mainAdmin/teachers";
     }
+    @RequestMapping(value = "/deleteTeacher", method = RequestMethod.POST)
+    public String deleteTeacher(@RequestParam(value = "idTeacher") Long id){
+        timeTableService.deleteByTSC(tsc.findTSCByIdTeacher(id));
+        tsc.deleteByTeacher(id);
+        teacherService.deleteTeacher(teacherService.findTeacherByIdTeacher(id));
+        return "redirect:/mainAdmin/teachers";
+    }
+
+
     @GetMapping(value = "/classes")
     public String showClasses(Map<String,Object> map){
         map.put("classes",classService.findAll());
@@ -247,6 +294,14 @@ public class AdminController {
         newClass.setName(name);
         classService.addClass(newClass);
         System.out.println("AUUU CHECKING IDDDDDD"+newClass.getIdclass());
+        return "redirect:/mainAdmin/classes";
+    }
+    @RequestMapping(value = "/deleteClass", method = RequestMethod.POST)
+    public String deleteClass(@RequestParam(value = "idClass") Long id){
+        studentService.deleteClassInStudents(id);
+        timeTableService.deleteByTSC(tsc.findTSCByIdClass(id));
+        tsc.deleteByClass(id);
+        classService.deleteClass(classService.findClassByIdClass(id));
         return "redirect:/mainAdmin/classes";
     }
 
@@ -262,6 +317,16 @@ public class AdminController {
         subjectService.addSubject(newSubject);
         return "redirect:/mainAdmin/subjects";
     }
+
+    @RequestMapping(value = "/deleteSubject", method = RequestMethod.POST)
+    public String deleteSubject(@RequestParam(value = "idSubject") Long id){
+
+        timeTableService.deleteByTSC(tsc.findTSCByIdSubject(id));
+        tsc.deleteBySubject(id);
+       subjectService.deleteSubject(subjectService.findSubjectByIdSubject(id));
+        return "redirect:/mainAdmin/subjects";
+    }
+
     @GetMapping(value = "/tsc")
     public String showTSC(@RequestParam(value="idClass", required = false)Long idClass,
                            Map<String,Object> map){
@@ -286,6 +351,16 @@ public class AdminController {
         tsc.addTSC(newTSC);
         return "redirect:/mainAdmin/tsc?idClass="+idClass;
     }
+
+    @RequestMapping(value = "/deleteTSC", method = RequestMethod.POST)
+    public String deleteTSC(@RequestParam(value = "idTSC") Long id){
+
+
+        timeTableService.deleteByTSC(tsc.findTSCByIdTSC(id));
+        tsc.deleteTSC(tsc.findTSCByIdTSC(id));
+        return "redirect:/mainAdmin/tsc";
+    }
+
     @GetMapping(value = "/plan")
     public String showPlan(@RequestParam(value="idClass", required = false)Long idClass,
             Map<String,Object> map){

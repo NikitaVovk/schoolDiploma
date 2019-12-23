@@ -15,8 +15,13 @@ public interface TeacherSubjectClassService {
     List<Teacher> findTeacherByIdClass(Long id);
     TeacherSubjectClass findTSCByIdTSC(Long idTSC);
     List<TeacherSubjectClass>findTSCByIdClass(Long id);
+    List<TeacherSubjectClass>findTSCByIdSubject(Long id);
+
     TeacherSubjectClass findTSCByIdClassAndIdSubject(Long idClass,Long idSubject);
     ArrayList<TeacherSubjectClass> findTSCByIdClassAndIdSubject(Long idClass, List<Subject> subjects);
     void addTSC(TeacherSubjectClass tsc);
     void deleteTSC(TeacherSubjectClass tsc);
+    void deleteByTeacher(Long id);
+    void deleteByClass(Long id);
+    void deleteBySubject(Long id);
 }

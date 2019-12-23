@@ -12,6 +12,7 @@ public interface TimeTableDao {
     List<LessonTime> findAllLessonTime();
     List<TimeTable> findTimeTableByIdClass(Long id);
     List<TimeTable> findTimeTableByIdTeacher(Long id);
+    List<TimeTable> findTimeTableByIdTSC(Long id);
     TimeTable findTimeTableByIdClassAndIdLessonTimeAndIdDayOfWeek(Long idClass,Long idLesson,Long idDay);
     void addTimeTable(TimeTable timeTable);
     void deleteTimeTable(TimeTable timeTable);

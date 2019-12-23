@@ -111,4 +111,18 @@ studentDao.addStudent(student);
     public void editStudent(Student student) {
 studentDao.updateStudent(student);
     }
+
+    @Override
+    public void deleteStudent(Student student) {
+        studentDao.deleteStudent(student);
+    }
+
+    @Override
+    public void deleteClassInStudents(Long id) {
+        List <Student> students = studentDao.findStudentsByIdClass(id);
+        for (Student s: students) {
+            s.setaClass(null);
+            this.editStudent(s);
+        }
+    }
 }

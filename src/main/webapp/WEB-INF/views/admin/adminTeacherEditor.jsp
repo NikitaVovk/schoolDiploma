@@ -36,8 +36,19 @@
                 <c:set var="addOrEdit" value="Edytuj"/>
             </c:otherwise>
         </c:choose>
+        <div style="display: grid; grid-auto-flow: column;">
         <div id = "tabName">
             <p>${addOrEdit} nauczyciela</p>
+        </div>
+
+            <c:if test="${addOrEdit.equals('Edytuj')}">
+                <div class="selectClass">
+                    <form method="post" action="${pageContext.request.contextPath}/mainAdmin/deleteTeacher">
+                        <input type="hidden" name="idTeacher" value="${teacher.idTeacher}">
+                        <input type="Submit" value="Usuń" >
+                    </form>
+                </div>
+            </c:if>
         </div>
         <div class="hr">
             <hr>
@@ -78,6 +89,23 @@
                 <br>
                 <label><strong>Data urodzenia</strong></label>
                 <input  class="ltAndHm" type="date" name="dateOfBirth" min="1945-01-01" max="2015-12-31" value="${teacher.dateOfBirth}">
+                <div>
+                    <hr>
+                </div>
+                <label><strong>Adres</strong></label>
+                <br>
+                <input type="text" name="address" value="${teacher.address}" class="ltAndHm">
+                <br>
+                <label><strong>Email</strong></label>
+                <br>
+                <input type="text" name="email" value="${teacher.email}" class="ltAndHm">
+                <br>
+                <label><strong>Telefon</strong></label>
+                <br>
+                <input type="text" name="phone" value="${teacher.phone}" class="ltAndHm">
+                <br>
+
+
                 <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
 
             </div>

@@ -13,6 +13,7 @@ public interface TeacherSubjectClassDao {
     List<Teacher> findTeacherByIdClass(Long id);
     List<TeacherSubjectClass>findTSCByIdTeacher(Long id);
     List<TeacherSubjectClass>findTSCByIdClass(Long id);
+    List<TeacherSubjectClass>findTSCByIdSubject(Long id);
     TeacherSubjectClass findTSCByIdTSC(Long idTSC);
     TeacherSubjectClass findTSCByIdClassAndIdSubject(Long idClass,Long idSubject);
     void addTSC(TeacherSubjectClass tsc);

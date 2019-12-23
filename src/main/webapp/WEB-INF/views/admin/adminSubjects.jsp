@@ -58,11 +58,18 @@
             <tr>
                 <th>ID</th>
                 <th>Nazwa Przedmiotu</th>
+                <th>Usuń</th>
             </tr>
             <c:forEach var="sub" items="${subjects}">
                 <tr>
                     <td>${id}</td>
                     <td>${sub.name}</td>
+                    <td>
+                        <form method="post" action="${pageContext.request.contextPath}/mainAdmin/deleteSubject">
+                            <input type="hidden" name="idSubject" value="${sub.idsubject}">
+                            <input type="Submit" value="Usuń" class="smallSubmit" style="justify-self: center;">
+                        </form>
+                    </td>
                 </tr>
                 <c:set var="id" value="${id+1}"/>
             </c:forEach>

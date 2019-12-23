@@ -9,4 +9,5 @@ public interface ClassDao {
     Class findClassByIdClass(Long id);
     List<Class> findAll();
     void addClass(Class cl);
+    void deleteClass(Class cl);
 }

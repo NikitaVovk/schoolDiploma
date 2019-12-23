@@ -23,5 +23,8 @@ public interface TimeTableService {
     void saveTimeTable(ArrayList<TeacherSubjectClass> tscList,Long idClass);
     Date findNextDateForLessonByIdTSCAndDate(Long id,Date today);
     Date findPrevDateForLessonByIdTSCAndDate(Long id,Date today);
+    void deleteByTSC(List<TeacherSubjectClass> tsc);
+    void deleteByTSC(TeacherSubjectClass tsc);
+    void deleteTimeTable(TimeTable timeTable);
 
 }

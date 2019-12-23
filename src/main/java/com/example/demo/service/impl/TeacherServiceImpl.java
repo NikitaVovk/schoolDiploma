@@ -97,4 +97,9 @@ public class TeacherServiceImpl implements TeacherService {
     public void updateTeacher(Teacher teacher) {
         teacherDao.updateTeacher(teacher);
     }
+
+    @Override
+    public void deleteTeacher(Teacher teacher) {
+teacherDao.deleteTeacher(teacher);
+    }
 }

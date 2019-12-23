@@ -52,4 +52,9 @@ public class SubjectDaoImpl extends AbstractDao<Long, Subject> implements Subjec
     public void addSubject(Subject subject) {
         persist(subject);
     }
+
+    @Override
+    public void deleteSubject(Subject subject) {
+delete(subject);
+    }
 }

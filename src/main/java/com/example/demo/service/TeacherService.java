@@ -21,4 +21,6 @@ public interface TeacherService {
     PagedListHolder<Teacher> findTeacherBySurNameAndName(String teacherSurName,String teacherName,int size, int page);
     void addTeacher(Teacher teacher);
     void updateTeacher(Teacher teacher);
+    void  deleteTeacher(Teacher teacher);
+
 }

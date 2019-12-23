@@ -8,5 +8,6 @@ public interface ClassService {
     List<Class> findAll();
     Class findClassByIdClass(Long id);
     void addClass(Class cl);
+    void deleteClass(Class cl);
 
 }

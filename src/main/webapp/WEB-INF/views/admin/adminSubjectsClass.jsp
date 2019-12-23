@@ -115,6 +115,7 @@
                     <th>№</th>
                     <th>Przedmiot</th>
                     <th>Nauczyciel</th>
+                    <th>Usuń</th>
                 </tr>
                 <c:set var="licznik" value="0"/>
                 <c:forEach var="tscItem" items="${tsc}">
@@ -123,6 +124,12 @@
                         <td>${licznik}</td>
                         <td>${tscItem.subject.name}</td>
                         <td>${tscItem.teacher.surname} ${tscItem.teacher.name}</td>
+                        <td>
+                            <form method="post" action="${pageContext.request.contextPath}/mainAdmin/deleteTSC">
+                                <input type="hidden" name="idTSC" value="${tscItem.id}">
+                                <input type="Submit" value="Usuń" class="smallSubmit" style="justify-self: center;">
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
