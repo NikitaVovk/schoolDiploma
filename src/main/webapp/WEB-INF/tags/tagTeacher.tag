@@ -58,7 +58,12 @@
         </li>
             <li>
                 <a href="${pageContext.request.contextPath}/mainTeacher/showPlan${linkIdTSC}" class="links">Plan zajęć</a>
-
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/mainTeacher/school" class="links">Moja szkoła</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/mainTeacher/data" class="links">Dane nauczyciela</a>
             </li>
         </ul>
 

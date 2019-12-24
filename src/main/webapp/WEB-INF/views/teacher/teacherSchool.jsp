@@ -1,25 +1,28 @@
 <%--
   Created by IntelliJ IDEA.
   User: vovknikita
-  Date: 31/10/2019
-  Time: 16:09
+  Date: 24/12/2019
+  Time: 15:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/teacher/index.css" />
+
 </head>
 <body>
-<t:tagStudent>
+<t:tagTeacher>
     <jsp:attribute name="header">
 
     </jsp:attribute>
     <jsp:attribute name="footer">
+
     </jsp:attribute>
     <jsp:body>
         <div id = "tabName">
@@ -31,7 +34,7 @@
         </div>
 
         <div id="tabNameInfo">
-        <h2>Szkoła</h2>
+            <h2>Szkoła</h2>
         </div>
         <div class="hr2">
             <hr>
@@ -56,35 +59,35 @@
                 </tr>
             </table>
         </div>
-<div id="tabNameInfo">
-        <h2>Nauczyciele</h2>
+        <div id="tabNameInfo">
+            <h2>Ucznie klasy ${teacher.aClass.name}</h2>
 
-</div>
+        </div>
         <div class="hr2">
             <hr>
         </div>
-<div class="midTable">
-        <table width="50%" border="2px solid blue">
-            <tr>
-                <th>Lp.</th>
-                <th>Przedmiot</th>
-                <th>Nauczyciel</th>
-            </tr>
-            <c:set var="i" value="0"/>
-            <c:forEach var="ts" items="${tsc}">
-                <c:set var="i" value="${i=i+1}"/>
+        <div class="midTable">
+            <table width="50%" border="2px solid blue">
                 <tr>
-                    <td>${i}</td>
-                    <td><div style="min-width: 225px">${ts.subject.name}</div></td>
-                    <td><div style="min-width: 300px">${ts.teacher.surname} ${ts.teacher.name}</div></td>
+                    <th>Lp.</th>
+                    <th>Uczeń</th>
+
                 </tr>
-            </c:forEach>
-        </table>
-</div>
+                <c:set var="i" value="0"/>
+                <c:forEach var="sl" items="${studentList}">
+                    <c:set var="i" value="${i=i+1}"/>
+                    <tr>
+                        <td>${i}</td>
+                        <td><div style="min-width: 525px">${sl.name} ${sl.surname}</div></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+
+
+
+
     </jsp:body>
-</t:tagStudent>
-
-
-
+</t:tagTeacher>
 </body>
 </html>

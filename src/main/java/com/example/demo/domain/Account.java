@@ -11,12 +11,12 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idaccount;
 
-    @Size(min = 3, max = 50)
+    //@Size(min = 3, max = 50)
     @NotNull
     @Column(name = "username", updatable = false, nullable = false, unique = true)
     private String username;
 
-    @Size(max = 60)
+   // @Size(max = 60)
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;

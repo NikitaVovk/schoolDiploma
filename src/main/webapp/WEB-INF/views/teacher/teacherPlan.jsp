@@ -82,8 +82,8 @@
                 </tr>
             </c:forEach>
         </table>
-        <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${prevWeek.getTime()}">Poprzedni tydzien</a>
-        <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${nextWeek.getTime()}">Następny tydzien</a>
+<%--        <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${prevWeek.getTime()}">Poprzedni tydzien</a>--%>
+<%--        <a href="${pageContext.request.contextPath}/mainTeacher/showPlan?date=${nextWeek.getTime()}">Następny tydzien</a>--%>
     </jsp:body>
 </t:tagTeacher>
 

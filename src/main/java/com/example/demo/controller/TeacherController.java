@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.domain.HomeWork;
-import com.example.demo.domain.LessonTheme;
-import com.example.demo.domain.Test;
+import com.example.demo.domain.*;
 import com.example.demo.security.AccountUserDetails;
 import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,9 @@ public class TeacherController {
 
     @Autowired
     private TestService testService;
+    @Autowired
+    private AccountService accountService;
+
 
     @GetMapping
     public ModelAndView teacherMainPage(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> teacherSubjectClass){
@@ -304,6 +305,44 @@ frequencyService.addFrequency(studentService.findStudentsByIdClass(teacherSubjec
         testService.deleteTest(testService.findTestByIdTSC(idTSC).get(idTest));
         return "redirect:/mainTeacher/showTest?idTSC="+idTSCBuf;
     }
+    @GetMapping("/data")
+    public String teacherData(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map,
+                              @RequestParam(value = "edit",required = false,defaultValue = "false") Boolean edit){
+        map.put("teacher",teacherService.findTeacherByIdAccount(account.getId()));
+        map.put("edit",edit);
+        return "teacher/teacherData";
+    }
 
+    @RequestMapping(value = "/editData", method = RequestMethod.POST)
+    public String editData(@AuthenticationPrincipal AccountUserDetails account,
+                           @RequestParam(value="address")String address,
+                           @RequestParam(value="email")String email,
+                           @RequestParam(value="phone")String phone) {
+        Teacher teacher = teacherService.findTeacherByIdAccount(account.getId());
+        teacher.setAddress(address);
+        teacher.setPhone(phone);
+        teacher.setEmail(email);
+        teacherService.updateTeacher(teacher);
+        return "redirect:/mainTeacher/data";
+    }
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(@AuthenticationPrincipal AccountUserDetails account,
+                                 @RequestParam(value="currentPassword")String currentPassword,
+                                 @RequestParam(value="newPassword")String newPassword,
+                                 @RequestParam(value="repeatNewPassword")String repeatNewPassword){
+        Account accountStudent = teacherService.findTeacherByIdAccount(account.getId()).getAccount();
+        if (currentPassword.equals(accountStudent.getPassword())&&newPassword.equals(repeatNewPassword)){
+            accountStudent.setPassword(newPassword);
+            accountService.editAccount(accountStudent);
+        }
+
+        return "redirect:/mainTeacher/data";
+    }
+    @GetMapping("/school")
+    public String school(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
+    map.put("teacher",teacherService.findTeacherByIdAccount(account.getId()));
+        map.put("studentList",studentService.findStudentsByIdClass(teacherService.findTeacherByIdAccount(account.getId()).getaClass().getIdclass()));
+        return "teacher/teacherSchool";
+}
 
 }

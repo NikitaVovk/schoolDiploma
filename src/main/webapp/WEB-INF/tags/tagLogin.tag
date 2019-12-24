@@ -38,6 +38,8 @@
 </main>
 <footer id="pagefooter">
     <div class="container" id="container-footer">
+        <p id="copyright">Copyright 2019, Politechnika Rzeszowska, Mykyta Vovk.</p>
+
         <jsp:invoke fragment="footer"/>
     </div>
 </footer>

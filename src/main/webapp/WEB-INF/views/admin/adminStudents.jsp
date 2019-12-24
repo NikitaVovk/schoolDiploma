@@ -19,7 +19,6 @@
     <jsp:attribute name="header">
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 <div style="display: grid; grid-auto-flow: column;">

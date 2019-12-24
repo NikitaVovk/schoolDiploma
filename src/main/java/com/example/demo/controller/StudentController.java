@@ -7,10 +7,7 @@ import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -40,12 +37,14 @@ public class StudentController {
     private HomeWorkService homeWorkService;
     @Autowired
     private TestService testService;
+    @Autowired
+    private AccountService accountService;
 
     @GetMapping
     public ModelAndView studentMainPage(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
     map.put("student",studentService.findStudentByIdAccount(account.getId()));
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("student/studentMainPage");
+        modelAndView.setViewName("student/studentPage");
         modelAndView.addObject("studentJSP",studentService.findStudentByIdAccount(account.getId()));
 
         return modelAndView;
@@ -158,9 +157,37 @@ public class StudentController {
         return "student/studentSchool";
     }
     @GetMapping("/data")
-    public String studentData(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
+    public String studentData(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map,
+                              @RequestParam(value = "edit",required = false,defaultValue = "false") Boolean edit){
         map.put("student",studentService.findStudentByIdAccount(account.getId()));
+        map.put("edit",edit);
         return "student/studentData";
+    }
+
+    @RequestMapping(value = "/editData", method = RequestMethod.POST)
+    public String editData(@AuthenticationPrincipal AccountUserDetails account,
+                           @RequestParam(value="address")String address,
+                           @RequestParam(value="email")String email,
+                           @RequestParam(value="phone")String phone) {
+        Student student = studentService.findStudentByIdAccount(account.getId());
+        student.setAddress(address);
+        student.setPhone(phone);
+        student.setEmail(email);
+        studentService.editStudent(student);
+        return "redirect:/mainStudent/data";
+    }
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(@AuthenticationPrincipal AccountUserDetails account,
+                           @RequestParam(value="currentPassword")String currentPassword,
+                           @RequestParam(value="newPassword")String newPassword,
+                           @RequestParam(value="repeatNewPassword")String repeatNewPassword){
+            Account accountStudent = studentService.findStudentByIdAccount(account.getId()).getAccount();
+            if (currentPassword.equals(accountStudent.getPassword())&&newPassword.equals(repeatNewPassword)){
+                accountStudent.setPassword(newPassword);
+                accountService.editAccount(accountStudent);
+            }
+
+        return "redirect:/mainStudent/data";
     }
 
 }
