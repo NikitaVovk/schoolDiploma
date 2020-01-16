@@ -97,6 +97,7 @@ public class TeacherController {
         Date date=null;
         if (dateSeconds==null) {
            for (Date d:timeTableService.findAllDatesForLesson(idTSC)){
+               System.out.println(d);
                if (d.before(Calendar.getInstance().getTime())||d.equals(Calendar.getInstance().getTime()))
                    date =new Date(d.getYear(),d.getMonth(),d.getDate());
            }

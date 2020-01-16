@@ -37,7 +37,7 @@ public class TimeTableServiceImpl implements TimeTableService {
 
         for (int j=8;j<=16;j++) {
             int month=j;
-            int year = calendarYear.getTime().getYear()+1900;
+            int year = calendarYear.getTime().getYear()+1899;
             YearMonth yearMonthObject;
             if (j>=12) {
                 month = month - 12;
@@ -183,6 +183,7 @@ return dates;
     public Date findNextDateForLessonByIdTSCAndDate(Long id,Date today) {
         ArrayList<Date> dates = new ArrayList<>();
         dates= this.findAllDatesForLesson(id);
+        System.out.println(today);
         for (Date d : dates){
             if (d.after(today))
                 return d;

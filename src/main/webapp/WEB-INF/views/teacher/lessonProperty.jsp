@@ -113,7 +113,7 @@
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/addLessonTheme?idTSC=${idTSC}&date=${dateChosen.getTime()}">
             <div class="lessonTheme">
-            <h2>Temat zajęcia</h2>
+            <h2 style="text-align: center;">Temat zajęcia</h2>
             <input type="text" name="lessonTheme"value="${lessonTheme.theme}" class="ltAndHm">
             <div class="centerSub">
             <input type="submit" value="Zatwierdź" class="smallSubmit">
@@ -124,7 +124,7 @@
 
         <form method="post" action="${pageContext.request.contextPath}/mainTeacher/addHomeWork?idTSC=${idTSC}&date=${dateChosen.getTime()}">
             <div class="lessonHM">
-            <h2>Zadanie domowe</h2>
+            <h2 style="text-align: center;">Zadanie domowe</h2>
             <input type="text" name="homeWork"value="${homeWork.homeWork}" class="ltAndHm">
             <div class="centerSub">
                 <input type="submit" value="Zatwierdź" class="smallSubmit">
