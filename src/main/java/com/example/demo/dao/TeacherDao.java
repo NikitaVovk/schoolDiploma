@@ -16,5 +16,5 @@ public interface TeacherDao {
     List<Teacher> findAll();
     void addTeacher(Teacher teacher);
     void updateTeacher(Teacher teacher);
-
+    void  deleteTeacher(Teacher teacher);
 }

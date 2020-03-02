@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class Hello {
+public class LoginController {
 //    @Autowired
 //    private StudentRepo studentRepo;
 //    @Autowired
@@ -30,7 +30,7 @@ public class Hello {
                            Map<String,Object> modelMarks,
                            Map<String,Object> modelSubjects){
 
-        return "greeting";
+        return "login";
     }
 
 

@@ -50,6 +50,11 @@ public class TeacherSubjectClassServiceImpl implements TeacherSubjectClassServic
     }
 
     @Override
+    public List<TeacherSubjectClass> findTSCByIdSubject(Long id) {
+        return  teacherSubjectClassDao.findTSCByIdSubject(id);
+    }
+
+    @Override
     public TeacherSubjectClass findTSCByIdClassAndIdSubject(Long idClass, Long idSubject) {
         return teacherSubjectClassDao.findTSCByIdClassAndIdSubject(idClass,idSubject);
     }
@@ -71,5 +76,29 @@ teacherSubjectClassDao.addTSC(tsc);
     @Override
     public void deleteTSC(TeacherSubjectClass tsc) {
 teacherSubjectClassDao.deleteTSC(tsc);
+    }
+
+    @Override
+    public void deleteByTeacher(Long id) {
+       List<TeacherSubjectClass>  tsc =teacherSubjectClassDao.findTSCByIdTeacher(id);
+        for (TeacherSubjectClass itemTSC:tsc) {
+            this.deleteTSC(itemTSC);
+        }
+    }
+
+    @Override
+    public void deleteByClass(Long id) {
+        List<TeacherSubjectClass>  tsc =teacherSubjectClassDao.findTSCByIdClass(id);
+        for (TeacherSubjectClass itemTSC:tsc) {
+            this.deleteTSC(itemTSC);
+        }
+    }
+
+    @Override
+    public void deleteBySubject(Long id) {
+        List<TeacherSubjectClass>  tsc =teacherSubjectClassDao.findTSCByIdSubject(id);
+        for (TeacherSubjectClass itemTSC:tsc) {
+            this.deleteTSC(itemTSC);
+        }
     }
 }

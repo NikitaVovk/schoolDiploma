@@ -37,24 +37,24 @@
             <hr>
         </div>
         <div class="leftTable">
-        <table>
-            <tr>
-                <th>Nazwa szkoły:</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Adres szkoły:</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Telofon:</th>
-                <td></td>
-            </tr>
-            <tr>
-                <th>Dyrektor:</th>
-                <td></td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <th>Nazwa szkoły:</th>
+                    <td><div style="min-width: 325px">IV Liceum Ogólnokształcące</div></td>
+                </tr>
+                <tr>
+                    <th>Adres szkoły:</th>
+                    <td>Swojska 6, 60-592 Poznań</td>
+                </tr>
+                <tr>
+                    <th>Telofon:</th>
+                    <td>+48 61 841 77 71</td>
+                </tr>
+                <tr>
+                    <th>Dyrektor:</th>
+                    <td>Dawid Kwiatkowski</td>
+                </tr>
+            </table>
         </div>
 <div id="tabNameInfo">
         <h2>Nauczyciele</h2>
@@ -76,7 +76,7 @@
                 <tr>
                     <td>${i}</td>
                     <td><div style="min-width: 225px">${ts.subject.name}</div></td>
-                    <td><div style="min-width: 300px">${ts.teacher.name}</div></td>
+                    <td><div style="min-width: 300px">${ts.teacher.surname} ${ts.teacher.name}</div></td>
                 </tr>
             </c:forEach>
         </table>

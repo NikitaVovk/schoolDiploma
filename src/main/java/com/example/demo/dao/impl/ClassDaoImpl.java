@@ -40,4 +40,9 @@ public class ClassDaoImpl extends AbstractDao<Long, Class> implements ClassDao {
     public void addClass(Class cl) {
     persist(cl);
     }
+
+    @Override
+    public void deleteClass(Class cl) {
+        delete(cl);
+    }
 }

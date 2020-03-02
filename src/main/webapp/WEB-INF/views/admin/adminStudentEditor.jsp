@@ -20,7 +20,6 @@
     <jsp:attribute name="header">
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
@@ -36,13 +35,23 @@
                 <c:set var="addOrEdit" value="Edytuj"/>
             </c:otherwise>
         </c:choose>
+<div style="display: grid; grid-auto-flow: column;">
         <div id = "tabName">
             <p>${addOrEdit} ucznia</p>
         </div>
+    <c:if test="${addOrEdit.equals('Edytuj')}">
+    <div class="selectClass">
+        <form method="post" action="${pageContext.request.contextPath}/mainAdmin/deleteStudent">
+            <input type="hidden" name="idStudent" value="${student.idstudent}">
+            <input type="Submit" value="Usuń ucznia" >
+        </form>
+    </div>
+    </c:if>
+</div>
         <div class="hr">
             <hr>
         </div>
-        <div id="tabNameInfo">
+        <div id="tabNameInfo" style="font-size: 20px;">
             <p>Wypełnij informację</p>
         </div>
 
@@ -62,7 +71,7 @@
                 <br>
 
             <label><strong>Klasa</strong></label>
-
+                <br>
             <select id="aClass" name="aClass" >
                 <option name="option" value="${null}" selected>-</option>
                 <c:forEach var="cl" items="${classes}">
@@ -76,8 +85,25 @@
             </select>
                 <br>
             <label><strong>Data urodzenia</strong></label>
+                <br>
             <input  class="ltAndHm" type="date" name="dateOfBirth" min="2000-01-01" max="2015-12-31" value="${student.dateOfBirth}">
-            <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
+<div>
+                    <hr>
+</div>
+                <label><strong>Adres</strong></label>
+                <br>
+                <input type="text" name="address" value="${student.address}" class="ltAndHm">
+                <br>
+                <label><strong>Email</strong></label>
+                <br>
+                <input type="text" name="email" value="${student.email}" class="ltAndHm">
+                <br>
+                <label><strong>Telefon</strong></label>
+                <br>
+                <input type="text" name="phone" value="${student.phone}" class="ltAndHm">
+                <br>
+
+                <input type="Submit" value="Zatwierdź" style="justify-self: center; margin-top: 20px;">
             </div>
         </form>
 

@@ -1,18 +1,22 @@
 package com.example.demo.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
 @Table(name = "Student")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idstudent")
     private Long idstudent;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String surname;
 
     @OneToOne

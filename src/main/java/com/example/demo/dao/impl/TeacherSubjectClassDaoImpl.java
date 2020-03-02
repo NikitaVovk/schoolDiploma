@@ -70,6 +70,16 @@ public class TeacherSubjectClassDaoImpl extends AbstractDao<Long, TeacherSubject
     }
 
     @Override
+    public List<TeacherSubjectClass> findTSCByIdSubject(Long id) {
+        Query query = createQuery("select c FROM  TeacherSubjectClass c, Subject s where c.subject = s.idsubject and s.idsubject=:id");
+        query.setParameter("id", id);
+        List<TeacherSubjectClass> listOfClass = query.list();
+        if(listOfClass==null)
+            return Collections.emptyList();
+        return  listOfClass;
+    }
+
+    @Override
     public TeacherSubjectClass findTSCByIdTSC(Long idTSC) {
         return getByKey(idTSC);
     }

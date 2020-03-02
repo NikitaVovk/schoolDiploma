@@ -29,15 +29,17 @@
             </div>
             <div class="selectClass">
                 <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
+
                 <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
                     <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showFrequency" selected>-</option>
-
+                    <c:set var="tscIter" value="0"/>
                     <c:forEach var="aClass" items="${classList}">
                         <c:set var="selected" value=""/>
-                        <c:if test="${aClass.id==idTSC}">
+                        <c:if test="${tscIter==idTSC}">
                             <c:set var="selected" value="selected"/>
                         </c:if>
-                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showFrequency?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showFrequency?idTSC=${tscIter}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                        <c:set var="tscIter" value="${tscIter+1}"/>
                     </c:forEach>
                 </select>
             </div>
@@ -61,7 +63,7 @@
                 <th>№</th>
                 <th>Uczeń</th>
                 <th>Liczba nieobecności</th>
-                <th>Procent obecności</th>
+                <th>Procent obecności, %</th>
             </tr>
             <c:set var="i" value="0"/>
             <c:forEach var="student" items="${listStudents}">
@@ -71,7 +73,8 @@
                     <td>
                             ${freqList.get(i).size()}
                     </td>
-                    <td>${freqPercent.get(i)}</td>
+                    <td>
+                            ${String.format("%.2f", freqPercent[i])}</td>
                     <c:set var="i" value="${i+1}"/>
                 </tr>
             </c:forEach>

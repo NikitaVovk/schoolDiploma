@@ -10,4 +10,6 @@ public interface SubjectService {
     Subject findSubjectByIdSubject(Long id);
 
     void addSubject (Subject subject);
+    void deleteSubject(Subject subject);
+
 }

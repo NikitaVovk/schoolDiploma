@@ -64,6 +64,16 @@ public class TimeTableDaoImpl extends AbstractDao<Long, TimeTable> implements Ti
     }
 
     @Override
+    public List<TimeTable> findTimeTableByIdTSC(Long id) {
+        Query query = createQuery("select tt from TimeTable tt, TeacherSubjectClass tsc where tsc.id=:id and tt.teacherSubjectClass=tsc.id");
+        query.setParameter("id",id);
+        List<TimeTable> listOfTimeTable = query.list();
+        if(listOfTimeTable==null)
+            return Collections.emptyList();
+        return  listOfTimeTable;
+    }
+
+    @Override
     public TimeTable findTimeTableByIdClassAndIdLessonTimeAndIdDayOfWeek(Long idClass, Long idLesson, Long idDay) {
         Query query = createQuery("SELECT  tt FROM TimeTable tt, LessonTime lt, DaysOfWeek dow, Class c, TeacherSubjectClass tsc where tt.lessonTime = lt.id and tt.daysOfWeek = dow.id and tt.teacherSubjectClass=tsc.id and tsc.aClass=c.idclass and " +
                 "lt.id=:idLesson and dow.id=:idDay and c.idclass=:idClass");

@@ -20,11 +20,7 @@
 
     </jsp:attribute>
 <jsp:attribute name="footer">
-                <div class="container" id="container-footer">
-                    <p id="copyright">
-                        Copyright 1927, Future Bits When There Be Bits Inc.
-                    </p>
-                </div>
+
     </jsp:attribute>
 <jsp:body>
     <div id="container">
@@ -44,7 +40,7 @@
 <div class="whiteHr">
     <hr>
 </div>
-            <input type="text" id="username" name="username" style="width: 260px">
+            <input class="data" type="text" id="username" name="username" style="width: 260px">
     </div>
 </div>
             <div class="login">
@@ -53,7 +49,7 @@
                 <div class="whiteHr">
                     <hr>
                 </div>
-            <input type="password" id="password" name="password" style="width: 260px">
+            <input type="password"  class="data" id="password" name="password" style="width: 260px">
 
             </div>
 

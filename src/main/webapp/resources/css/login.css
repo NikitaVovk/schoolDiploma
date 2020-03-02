@@ -80,7 +80,7 @@ p {
     height: 40px;
     margin-right: 30px;
 }
-input {
+input[type=submit] {
     width: 100px;
 
     line-height: 40px;
@@ -198,4 +198,16 @@ input {
     height: 85px;
     width: 145px;
 
+}
+.data{
+    width: 100px;
+
+    line-height: 40px;
+
+    font-size: 18px;
+    text-align: center;
+
+
+    border: 1px white solid;
+    border-radius: 5px;
 }

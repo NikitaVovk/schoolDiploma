@@ -39,8 +39,8 @@
         <table width="100%" border="2px solid blue">
             <tr>
                 <th>Przedmiot</th>
-                <th>Nieobecność</th>
-                <th>Procent</th>
+                <th>Nieobecności</th>
+                <th>Procent obecności, %</th>
             </tr>
             <c:set var="i" value="0"/>
             <c:forEach var="subjectItem" items="${subjects}" >

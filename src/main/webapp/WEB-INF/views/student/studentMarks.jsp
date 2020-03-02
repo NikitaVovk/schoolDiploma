@@ -15,29 +15,21 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/student/index.css" />
 </head>
 <body>
-
-
 <t:tagStudent>
     <jsp:attribute name="header">
-
     </jsp:attribute>
     <jsp:attribute name="footer">
-
     </jsp:attribute>
     <jsp:body>
-
         <div id = "tabName">
             <p>Oceny</p>
         </div>
-
         <div class="hr">
             <hr>
         </div>
-
         <div id="tabNameInfo">
             <p>Twoje oceny uzyskane w tym semestrze:</p>
         </div>
-
         <table width="100%" border="2px solid blue">
             <tr>
                 <th style="min-width: 160px;">Przedmiot</th>
@@ -61,10 +53,7 @@
                 </tr>
             </c:forEach>
         </table>
-
     </jsp:body>
 </t:tagStudent>
-
-
 </body>
 </html>

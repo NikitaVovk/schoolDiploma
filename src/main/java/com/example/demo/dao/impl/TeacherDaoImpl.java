@@ -84,4 +84,9 @@ public class TeacherDaoImpl extends AbstractDao<Long, Teacher> implements Teache
     public void updateTeacher(Teacher teacher) {
         update(teacher);
     }
+
+    @Override
+    public void deleteTeacher(Teacher teacher) {
+delete(teacher);
+    }
 }

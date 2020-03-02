@@ -29,16 +29,18 @@
             </div>
             <div class="selectClass">
                 <div style="display: grid;justify-content: center;align-content: center; margin-bottom: 3px; font-size: 13px;"><p>Wybierz klasę</p></div>
-                <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
-                    <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showTest" selected>-</option>
-
-                    <c:forEach var="aClass" items="${classList}">
-                        <c:set var="selected" value=""/>
-                        <c:if test="${aClass.id==idTSC}">
-                            <c:set var="selected" value="selected"/>
-                        </c:if>
-                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showTest?idTSC=${aClass.id}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
-                    </c:forEach>
+                    <select id="idTSC" name="idTSC"  class="selectorClass" onchange="location = this.value;" >
+                        <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showTest" selected>-</option>
+                        <c:set var="tscIter" value="0"/>
+                        <c:forEach var="aClass" items="${classList}">
+                            <c:set var="selected" value=""/>
+                            <c:if test="${tscIter==idTSC}">
+                                <c:set var="selected" value="selected"/>
+                            </c:if>
+                            <option name="option" value="${pageContext.request.contextPath}/mainTeacher/showTest?idTSC=${tscIter}" ${selected}>${aClass.subject.name} - ${aClass.aClass.name}</option>
+                            <c:set var="tscIter" value="${tscIter+1}"/>
+                        </c:forEach>
+                    </select>
                 </select>
             </div>
         </div>
@@ -49,13 +51,14 @@
 
     <c:if test="${idTSC!=null}">
         <div id="tabNameInfo" style="font-size: 20px;">
-            <p>Przedmiot - <b>"${tsc.subject.name}"</b>, klasa - <b>"${tsc.aClass.name}"</b></p>
+            <p>Przedmiot - <b>"${className.subject.name}"</b>, klasa - <b>"${className.aClass.name}"</b></p>
 
         </div>
 
 
 
             <div class="midTable">
+                <c:if test="${!tests.isEmpty()}">
         <table   border="2px solid blue">
             <tr>
                 <th>№</th>
@@ -80,6 +83,7 @@
                 <c:set var="i" value="${i+1}"/>
             </c:forEach>
         </table>
+                </c:if>
             </div>
         <div style="display:grid;align-content: center;justify-content: center;">
             <form method="post" action="${pageContext.request.contextPath}/mainTeacher/addTest" >

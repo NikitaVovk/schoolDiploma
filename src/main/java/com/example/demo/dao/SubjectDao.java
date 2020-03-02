@@ -11,4 +11,5 @@ public interface SubjectDao {
     List<Subject> findSubjectsByIdClass(Long id);
     List<Subject> findAll();
     void addSubject (Subject subject);
+    void deleteSubject(Subject subject);
 }

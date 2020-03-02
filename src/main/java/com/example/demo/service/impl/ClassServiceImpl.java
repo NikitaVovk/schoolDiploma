@@ -28,4 +28,9 @@ public class ClassServiceImpl implements ClassService {
     public void addClass(Class cl) {
     classDao.addClass(cl);
     }
+
+    @Override
+    public void deleteClass(Class cl) {
+classDao.deleteClass(cl);
+    }
 }

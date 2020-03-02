@@ -48,6 +48,20 @@ public class AccountServiceImpl implements AccountService {
         return accountId;
     }
 
+    @Override
+    public void editAccount(Account account) {
+        accountDao.editAccount(account);
+    }
+
+    @Override
+    public void addAccount(Account account) {
+        accountDao.addAccount(account);
+    }
+
+    @Override
+    public void deleteAccount(Account account) {
+        accountDao.deleteAccount(account);
+    }
 
 
 }

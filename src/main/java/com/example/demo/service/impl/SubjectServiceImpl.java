@@ -36,4 +36,9 @@ public class SubjectServiceImpl implements SubjectService {
     public void addSubject(Subject subject) {
         subjectDao.addSubject(subject);
     }
+
+    @Override
+    public void deleteSubject(Subject subject) {
+        subjectDao.deleteSubject(subject);
+    }
 }

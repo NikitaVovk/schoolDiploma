@@ -20,7 +20,6 @@
 
     </jsp:attribute>
     <jsp:attribute name="footer">
-      <p id="copyright">Copyright 1927, Future Bits When There Be Bits Inc.</p>
     </jsp:attribute>
     <jsp:body>
 
@@ -30,7 +29,7 @@
         <div class="hr">
             <hr>
         </div>
-        <div id="tabNameInfo">
+        <div id="tabNameInfo" style="font-size: 20px;">
             <p>Wszystkie przedmioty szkoły</p>
         </div>
         <div class="smallHr">
@@ -58,11 +57,18 @@
             <tr>
                 <th>ID</th>
                 <th>Nazwa Przedmiotu</th>
+                <th>Usuń</th>
             </tr>
             <c:forEach var="sub" items="${subjects}">
                 <tr>
                     <td>${id}</td>
                     <td>${sub.name}</td>
+                    <td>
+                        <form method="post" action="${pageContext.request.contextPath}/mainAdmin/deleteSubject">
+                            <input type="hidden" name="idSubject" value="${sub.idsubject}">
+                            <input type="Submit" value="Usuń" class="smallSubmit" style="justify-self: center;">
+                        </form>
+                    </td>
                 </tr>
                 <c:set var="id" value="${id+1}"/>
             </c:forEach>
