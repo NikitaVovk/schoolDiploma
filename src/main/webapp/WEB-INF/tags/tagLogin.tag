@@ -19,10 +19,6 @@
                 </div>
 
             </div>
-
-
-
-
         </div>
     </div>
 </header>
@@ -30,12 +26,11 @@
 <main id="content-body">
     <div class="container" id="container-body">
 
-
-
                 <jsp:doBody/>
 
     </div>
 </main>
+
 <footer id="pagefooter">
     <div class="container" id="container-footer">
         <p id="copyright">Copyright 2019, Politechnika Rzeszowska, Mykyta Vovk.</p>
@@ -45,3 +40,4 @@
 </footer>
 </body>
 </html>
+

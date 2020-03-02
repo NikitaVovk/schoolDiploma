@@ -21,10 +21,9 @@ import java.util.List;
 @Service("marksService")
 @Transactional
 public class MarksServiceImpl implements MarksService {
+
     @Autowired
     private MarksDao marksDao;
-
-
 
     @Override
     public ArrayList<List<Marks>> findMarksByIdStudentAndIdSubject(List<Student> students, Long idSubject) {
@@ -32,15 +31,6 @@ public class MarksServiceImpl implements MarksService {
 
         for (Student student:students) {
             List<Marks> marks = marksDao.findMarksByIdStudentAndIdSubject(student.getIdstudent(),idSubject);
-//            if (marks!=null)
-//            marksList.add(marks);
-//            else
-//                marks.add(new Marks());
-////            marksList.add(marks);
-//            System.out.println(marks+"!!!MARKS SERVICE!!!");
-//            for (Marks markses:marks) {
-//                System.out.println(markses.getMark());
-//            }
                 marksList.add(marks);
 
         }

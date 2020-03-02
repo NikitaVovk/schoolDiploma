@@ -58,9 +58,12 @@ public class StudentController {
 
     @GetMapping("/marks")
     public String studentMarks(@AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
-        map.put("subjects",subjectService.findSubjectsByIdClass(studentService.findStudentByIdAccount(account.getId()).getaClass().getIdclass()));
-        map.put("marksSubject",marksService.findMarksByIdStudentAndIdSubject(studentService.findStudentByIdAccount(account.getId()),
-                subjectService.findSubjectsByIdClass(studentService.findStudentByIdAccount(account.getId()).getaClass().getIdclass())));
+        map.put("subjects",subjectService.findSubjectsByIdClass(studentService.findStudentByIdAccount(account.getId())
+                .getaClass().getIdclass()));
+        map.put("marksSubject",marksService.findMarksByIdStudentAndIdSubject(studentService
+                        .findStudentByIdAccount(account.getId()),
+                         subjectService.findSubjectsByIdClass(studentService.findStudentByIdAccount(account
+                        .getId()).getaClass().getIdclass())));
         return "student/studentMarks";
     }
 

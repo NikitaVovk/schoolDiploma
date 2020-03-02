@@ -29,10 +29,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    private DataSource dataSource;// этот бин создает автоматичеки spring boot, поэтому мы просто его используем
-
-
     @Autowired
     private UserDetailServiceImpl loginService;
 
@@ -47,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/mainTeacher/**").hasRole("TEACHER")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/mainStudent/**").hasRole("STUDENT")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
-                .antMatchers("/mainAdmin/**").hasRole("ADMIN")// здесь автоматически будет добавлен префикс ROLE_,  поэтому указываем название роли без него
+                .antMatchers("/mainTeacher/**").hasRole("TEACHER")
+                .antMatchers("/mainStudent/**").hasRole("STUDENT")
+                .antMatchers("/mainAdmin/**").hasRole("ADMIN")
                 .antMatchers("/resources/css/**").permitAll()
                 .antMatchers("/resources/images/**").permitAll()
                 .anyRequest().authenticated()
@@ -59,7 +55,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin()
                 .loginPage("/login")
-//                .defaultSuccessUrl("/mainTeacher")
                 .loginProcessingUrl("/login")
                 .successHandler(myAuthenticationSuccessHandler())
                 .passwordParameter("password")
