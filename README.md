@@ -1,5 +1,5 @@
 # Online high school management system
-***
+
 ### Key words: high school management system, Java, Spring, MVC, relational database, Hibernate, MySQL, TomCat, JSP, HTML, CSS, Intellij Idea.
 ***
 ## Description:
