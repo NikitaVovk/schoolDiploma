@@ -218,6 +218,7 @@ public class AdminController {
         return "admin/adminTeachers";
     }
 
+    //teacherEditorBellow
     @GetMapping("/teacherEditor")
     public String teacherEditor(@RequestParam(value = "idTeacher",required = false) Long idTeacher,
                                 @AuthenticationPrincipal AccountUserDetails account, Map<String,Object> map){
